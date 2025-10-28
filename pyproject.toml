@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "penguinstransittoolbox"
+version = "0.1.0"
+description = "Penguin's Transit Toolbox :  a simple python toolbox for managing GTFS data. Work in progress"
+readme = "README.md"
+license = { text = "Unlicense" }
+authors = [
+    { name = "Maxence Marchand", email = "mxnc.marchand@gmail.com" }
+]
+keywords = ["GTFS", "geopandas", "transit", "transport", "shapely", "data"]
+requires-python = ">=3.9"
+
+# Runtime dependencies: all third-party packages you import
+dependencies = [
+    "pandas>=1.5",
+    "geopandas>=0.13",
+    "shapely>=2.0",
+    "requests>=2.30",
+    "fiona>=1.9",
+    "pyproj>=3.5",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "ruff>=0.4",
+    "black>=24.0",
+    "mypy>=1.0",
+]
+
+[project.urls]
+Homepage = ""
+Repository = ""
+Issues = ""
+
+[tool.setuptools.packages.find]
+where = ["src"]
