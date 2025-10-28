@@ -33,9 +33,9 @@ dev = [
 ]
 
 [project.urls]
-Homepage = ""
-Repository = ""
-Issues = ""
+Homepage = "https://github.com/mxncmrchnd/penguinstransittoolbox"
+Repository = "https://github.com/mxncmrchnd/penguinstransittoolbox"
+Issues = "https://github.com/mxncmrchnd/penguinstransittoolbox/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]
