@@ -2,7 +2,7 @@
 
 [![Python versions](https://img.shields.io/pypi/pyversions/gtfs_tools.svg)](https://pypi.org/project/gtfs_tools/)
 [![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](https://unlicense.org/)
-[![Build Status](https://github.com/yourname/gtfs_tools/actions/workflows/tests.yml/badge.svg)](https://github.com/yourname/gtfs_tools/actions)
+[![Build Status](https://github.com/yourname/gtfs_tools/actions/workflows/tests.yml/badge.svg)](https://github.com/mxncmrchnd/penguinstransittoolbox/actions)
 
 ---
 
