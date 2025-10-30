@@ -10,7 +10,7 @@ from typing import Dict, Union, Callable
 
 """
 GTFS Loaders from ZIP files
-----------------
+---------------------------
 Functions to load GTFS data from ZIP archives (local or remote).
 
 Notes
