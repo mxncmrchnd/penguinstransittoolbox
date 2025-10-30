@@ -1,8 +1,8 @@
 # Penguin's Transit Toolbox
 
-[![Python versions](https://img.shields.io/pypi/pyversions/gtfs_tools.svg)](https://pypi.org/project/gtfs_tools/)
+[![Python Version](https://img.shields.io/badge/python-%3E%3D3.9-blue.svg)]()
 [![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](https://unlicense.org/)
-[![Build Status](https://github.com/yourname/gtfs_tools/actions/workflows/tests.yml/badge.svg)](https://github.com/mxncmrchnd/penguinstransittoolbox/actions)
+![Status](https://img.shields.io/badge/status-work--in--progress-orange)
 
 ---
 
