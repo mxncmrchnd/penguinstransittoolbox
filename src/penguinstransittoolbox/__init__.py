@@ -29,6 +29,10 @@ from .ptt_zip import (
     load_feed
 )
 
+from .ptt_export import (
+    export_stops
+)
+
 __all__ = [
     "zip_agency",
     "zip_calendar",
@@ -43,5 +47,6 @@ __all__ = [
     "zip_stops",
     "zip_transfers",
     "zip_trips",
-    "load_feed"
+    "load_feed",
+    "export_stops"
 ]
