@@ -2,29 +2,17 @@
 Penguin's Transit Toolbox
 =========================
 
-A lightweight GTFS (General Transit Feed Specification) loader package
-for reading and managing transit feed data directly from ZIP archives
-or URLs.
-
-This package provides a collection of loader functions that read
-individual GTFS components (stops, routes, trips, etc.) and a master
-loader that aggregates all available files in a feed.
+A python package to manage GTFS feeds.
 
 Modules
 -------
-gtfs_loader : 
+ptt_zip : 
     Contains all `zip_*` loader functions, the shared helper functions, 
     and the `load_gtfs_feed()` master loader.
 
-Usage
------
->>> from gtfs_tools import load_gtfs_feed
->>> feed = load_gtfs_feed("https://transitfeeds.com/p/mbta/64/latest/download")
->>> feed["stops"].head()
-
 """
 
-from .zip_utils import (
+from .ptt_zip import (
     zip_agency,
     zip_calendar,
     zip_calendar_dates,
