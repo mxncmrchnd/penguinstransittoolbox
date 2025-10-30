@@ -25,6 +25,7 @@
 
 - Loading of GTFS files, either individually or in a dictionnary ;
 - Support of both standard and spatial tables ;
+- Export of `stops` and `shapes` as GIS-ready files ;
 - Detection of available files ;
 - Geometry validation ;
 - Compatibility with `pandas`, `geopandas` and `shapely`.
