@@ -35,7 +35,7 @@
 
 For local development only (for now).
 ```bash
-pip install -e
+pip install -e .
 ```
 
 ---
