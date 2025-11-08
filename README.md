@@ -37,8 +37,14 @@
 
 ## Installation
 
-For local development only (for now).
+From PyPI
+```python
+pip install penguinstransittoolbox
+```
+
+For local development from the latest build on Github.
 ```bash
+git clone https://github.com/mxncmrchnd/penguinstransittoolbox.git
 pip install -e .
 ```
 
