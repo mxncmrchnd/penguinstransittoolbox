@@ -6,49 +6,22 @@ A python package to manage GTFS feeds.
 
 Modules
 -------
-ptt_zip : 
-    Contains all `zip_*` loader functions, the shared helper functions, 
-    and the `load_gtfs_feed()` master loader.
+zip : 
+    A module to read GTFS data from a ZIP file.
+
+gis :
+    A module to export stops and shapes as GIS-ready files.
 
 """
 
-from .ptt_zip import (
-    zip_agency,
-    zip_calendar,
-    zip_calendar_dates,
-    zip_fare_attributes,
-    zip_fare_rules,
-    zip_feed_info,
-    zip_frequencies,
-    zip_routes,
-    zip_shapes,
-    zip_stop_times,
-    zip_stops,
-    zip_transfers,
-    zip_trips,
-    load_feed
-)
-
-from .ptt_export import (
-    export_stops,
-    export_shapes
-)
+from importlib import import_module
 
 __all__ = [
-    "zip_agency",
-    "zip_calendar",
-    "zip_calendar_dates",
-    "zip_fare_attributes",
-    "zip_fare_rules",
-    "zip_feed_info",
-    "zip_frequencies",
-    "zip_routes",
-    "zip_shapes",
-    "zip_stop_times",
-    "zip_stops",
-    "zip_transfers",
-    "zip_trips",
-    "load_feed",
-    "export_stops",
-    "export_shapes"
+    "zip",
+    "gis"
 ]
+
+def __getattr__(name):
+    if name in __all__:
+        return import_module(f".{name}", __name__)
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")

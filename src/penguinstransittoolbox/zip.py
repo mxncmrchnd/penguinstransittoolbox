@@ -61,7 +61,7 @@ def _validate_geometries(gdf: gpd.GeoDataFrame, name: str) -> None:
     if invalid_geom.any():
         warnings.warn(f"[{name}] has {invalid_geom.sum()} invalid geometries (self-intersecting or corrupted).")
 
-def zip_agency(path: str) -> pd.DataFrame:
+def read_agency(path: str) -> pd.DataFrame:
     """
     Loads the `agency.txt` from a GTFS ZIP file (local or remote) into a DataFrame.
 
@@ -76,7 +76,7 @@ def zip_agency(path: str) -> pd.DataFrame:
     """
     return _open_file(path, "agency.txt")
 
-def zip_calendar(path: str) -> pd.DataFrame:
+def read_calendar(path: str) -> pd.DataFrame:
     """
     Loads the `calendar.txt` from a GTFS ZIP file (local or remote) into a DataFrame.
 
@@ -91,7 +91,7 @@ def zip_calendar(path: str) -> pd.DataFrame:
     """
     return _open_file(path, "calendar.txt")
 
-def zip_calendar_dates(path: str) -> pd.DataFrame:
+def read_calendar_dates(path: str) -> pd.DataFrame:
     """
     Loads the `calendar_dates.txt` from a GTFS ZIP file (local or remote) into a DataFrame.
 
@@ -106,7 +106,7 @@ def zip_calendar_dates(path: str) -> pd.DataFrame:
     """
     return _open_file(path, "calendar_dates.txt")
 
-def zip_fare_attributes(path: str) -> pd.DataFrame:
+def read_fare_attributes(path: str) -> pd.DataFrame:
     """
     Loads the `fare_attributes.txt` from a GTFS ZIP file (local or remote) into a DataFrame.
 
@@ -121,7 +121,7 @@ def zip_fare_attributes(path: str) -> pd.DataFrame:
     """
     return _open_file(path, "fare_attributes.txt")
 
-def zip_fare_rules(path: str) -> pd.DataFrame:
+def read_fare_rules(path: str) -> pd.DataFrame:
     """
     Loads the `fare_rules.txt` from a GTFS ZIP file (local or remote) into a DataFrame.
 
@@ -136,7 +136,7 @@ def zip_fare_rules(path: str) -> pd.DataFrame:
     """
     return _open_file(path, "fare_rules.txt")
 
-def zip_feed_info(path: str) -> pd.DataFrame:
+def read_feed_info(path: str) -> pd.DataFrame:
     """
     Loads the `feed_info.txt` from a GTFS ZIP file (local or remote) into a DataFrame.
 
@@ -151,7 +151,7 @@ def zip_feed_info(path: str) -> pd.DataFrame:
     """
     return _open_file(path, "feed_info.txt")
 
-def zip_frequencies(path: str) -> pd.DataFrame:
+def read_frequencies(path: str) -> pd.DataFrame:
     """
     Loads the `frequencies.txt` from a GTFS ZIP file (local or remote) into a DataFrame.
 
@@ -166,7 +166,7 @@ def zip_frequencies(path: str) -> pd.DataFrame:
     """
     return _open_file(path, "frequencies.txt")
 
-def zip_routes(path: str) -> pd.DataFrame:
+def read_routes(path: str) -> pd.DataFrame:
     """
     Loads the `routes.txt` from a GTFS ZIP file (local or remote) into a DataFrame.
 
@@ -181,7 +181,7 @@ def zip_routes(path: str) -> pd.DataFrame:
     """
     return _open_file(path, "routes.txt")
 
-def zip_shapes(path: str) -> gpd.GeoDataFrame:
+def read_shapes(path: str) -> gpd.GeoDataFrame:
     """
     Loads the `shapes.txt` from a GTFS ZIP file (local or remote) into a GeoDataFrame.
 
@@ -217,7 +217,7 @@ def zip_shapes(path: str) -> gpd.GeoDataFrame:
     shapes_gdf = gpd.GeoDataFrame(lines, geometry="geometry", crs="EPSG:4326")
     return shapes_gdf
 
-def zip_stops(path: str) -> gpd.GeoDataFrame:
+def read_stops(path: str) -> gpd.GeoDataFrame:
     """
     Loads the `stops.txt` from a GTFS ZIP file (local or remote) into a GeoDataFrame.
 
@@ -247,7 +247,7 @@ def zip_stops(path: str) -> gpd.GeoDataFrame:
     stops_gdf = gpd.GeoDataFrame(stops_df, geometry = geometry, crs="EPSG:4326")
     return stops_gdf
 
-def zip_stop_times(path: str) -> pd.DataFrame:
+def read_stop_times(path: str) -> pd.DataFrame:
     """
     Loads the `stop_times.txt` from a GTFS ZIP file (local or remote) into a DataFrame.
 
@@ -262,7 +262,7 @@ def zip_stop_times(path: str) -> pd.DataFrame:
     """
     return _open_file(path, "stop_times.txt")
 
-def zip_transfers(path: str) -> pd.DataFrame:
+def read_transfers(path: str) -> pd.DataFrame:
     """
     Loads the `transfers.txt` from a GTFS ZIP file (local or remote) into a DataFrame.
 
@@ -277,7 +277,7 @@ def zip_transfers(path: str) -> pd.DataFrame:
     """
     return _open_file(path, "transfers.txt")
 
-def zip_trips(path: str) -> pd.DataFrame:
+def read_trips(path: str) -> pd.DataFrame:
     """
     Loads the `trips.txt` from a GTFS ZIP file (local or remote) into a DataFrame.
 
@@ -296,8 +296,8 @@ def load_feed(path: str) -> Dict[str, Union[pd.DataFrame, gpd.GeoDataFrame]]:
     """
     Loads an entire GTFS feed (ZIP file or URL) into memory.
 
-    This master loader automatically detects and calls all `zip_*` functions 
-    defined in this module. Each `zip_*` function loads a specific GTFS 
+    This master loader automatically detects and calls all `read_*` functions 
+    defined in this module. Each `read_*` function loads a specific GTFS 
     component (e.g., stops, routes, trips) and returns a DataFrame or 
     GeoDataFrame as appropriate.
 
@@ -348,7 +348,7 @@ def load_feed(path: str) -> Dict[str, Union[pd.DataFrame, gpd.GeoDataFrame]]:
     loaders : Dict[str, Callable]={
         name[4:]: func
         for name, func in current_module.items()
-        if callable(func) and name.startswith("zip_")
+        if callable(func) and name.startswith("read_")
     }
     # Checks the files availability
     if path.startswith(("http://", "https://")):
