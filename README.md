@@ -62,7 +62,7 @@ ptt.gis.export_shapes(feed['shapes'], output='shapes.shp', format='Shapefile')
 
 ## Documentation
 
-The documentation is available [here](https://img.shields.io/badge/docs-online-blue)](https://mxncmrchnd.github.io/penguinstransittoolbox/penguinstransittoolbox.html).
+The documentation is available [here](https://mxncmrchnd.github.io/penguinstransittoolbox/penguinstransittoolbox.html).
 
 ## Requirements
 
