@@ -28,7 +28,7 @@ jobs:
 
       - name: Generate documentation
         run: |
-          pdoc --html -o docs src/penguinstransittoolbox --force
+          pdoc -o docs src/gtfs_tools
 
       - name: Commit documentation changes
         run: |
