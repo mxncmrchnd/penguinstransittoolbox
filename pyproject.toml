@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "penguinstransittoolbox"
-version = "0.1.0"
+version = "0.1.1"
 description = "Penguin's Transit Toolbox :  a simple python toolbox for managing GTFS data. Work in progress"
 readme = "README.md"
 license = { text = "Unlicense" }
