@@ -3,6 +3,7 @@
 [![Python Version](https://img.shields.io/badge/python-%3E%3D3.9-blue.svg)]()
 [![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](https://unlicense.org/)
 ![Status](https://img.shields.io/badge/status-work--in--progress-orange)
+[![Documentation](https://img.shields.io/badge/docs-online-blue)](https://mxncmrchnd.github.io/penguinstransittoolbox/penguinstransittoolbox.html)
 
 ---
 
@@ -61,8 +62,7 @@ ptt.gis.export_shapes(feed['shapes'], output='shapes.shp', format='Shapefile')
 
 ## Documentation
 
-[![Documentation](https://img.shields.io/badge/docs-online-blue)](https://mxncmrchnd.github.io/penguinstransittoolbox/penguinstransittoolbox.html)
-The documentation is available online.
+The documentation is available [here](https://img.shields.io/badge/docs-online-blue)](https://mxncmrchnd.github.io/penguinstransittoolbox/penguinstransittoolbox.html).
 
 ## Requirements
 
