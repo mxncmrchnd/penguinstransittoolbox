@@ -14,6 +14,8 @@
 
 - [Features](#features)
 - [Installation](#installation)
+- [Usage examples](#usage-examples)
+- [Documentation](#documentation)
 - [Requirements](#requirements)
 - [License](#license)
 - [Project Status](#project-status)
@@ -40,6 +42,26 @@ pip install -e .
 ```
 
 ---
+
+## Usage examples
+
+Importing the package :
+```python
+import penguinstransittoolbox as ptt
+```
+
+Loading a feed and exporting its geographical features to GIS-ready files :
+```python
+feed = ptt.zip.load_feed('example/feed.zip')
+# export the stops as GeoPackage (the default output format)
+ptt.gis.export_stops(feed['stops'], output='stops.gpkg')
+# export the shapes as ESRI Shapefile
+ptt.gis.export_shapes(feed['shapes'], output='shapes.shp', format='Shapefile')
+```
+
+## Documentation
+
+The documentation is available [here](docs/index.html)
 
 ## Requirements
 
