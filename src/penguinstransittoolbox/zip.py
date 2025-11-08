@@ -327,7 +327,7 @@ def load_feed(path: str) -> Dict[str, Union[pd.DataFrame, gpd.GeoDataFrame]]:
 
     Notes
     -----
-    - The loader automatically discovers all functions named `zip_*` in this module.
+    - The loader automatically discovers all functions named `read_*` in this module.
     - Only GTFS files present in the ZIP archive are loaded; missing optional files
       are skipped silently (with a warning).
     - `stops` and `shapes` are typically returned as GeoDataFrames; all others 
@@ -346,7 +346,7 @@ def load_feed(path: str) -> Dict[str, Union[pd.DataFrame, gpd.GeoDataFrame]]:
     # Gets the list of functions
     current_module = globals()
     loaders : Dict[str, Callable]={
-        name[4:]: func
+        name[5:]: func
         for name, func in current_module.items()
         if callable(func) and name.startswith("read_")
     }
