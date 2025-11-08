@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pdoc geopandas pandas requests
+          pip install pdoc geopandas pandas requests shapely
 
       - name: Generate documentation
         run: |
