@@ -34,7 +34,7 @@ jobs:
           sed -i "s/^version = .*/version = \"$TAG_VERSION\"/" pyproject.toml
 
       - name: Build package
-        run: 
+        run: |
           rm -rf dist build *.egg-info
           python -m build
 
