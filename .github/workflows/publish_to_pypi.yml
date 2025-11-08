@@ -27,8 +27,16 @@ jobs:
           python -m pip install --upgrade pip
           pip install build twine
 
+      - name: Sync version from Git tag
+        run: |
+          TAG_VERSION=${GITHUB_REF#refs/tags/v}
+          echo "Using version $TAG_VERSION"
+          sed -i "s/^version = .*/version = \"$TAG_VERSION\"/" pyproject.toml
+
       - name: Build package
-        run: python -m build
+        run: 
+          rm -rf dist build *.egg-info
+          python -m build
 
       - name: Publish to PyPI
         env:
