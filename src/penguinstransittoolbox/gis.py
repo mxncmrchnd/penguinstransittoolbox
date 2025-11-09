@@ -51,6 +51,7 @@ def export_shapes(shapes_gdf: gpd.GeoDataFrame, output: str, format: Literal["Ge
     ------
     ValueError
         If the input file is not correct (must be a GeoDataFrame, with no missing required colums, and a LineString geometry)
+    
     OSError
         If there was an error when writing the file
         
@@ -90,6 +91,7 @@ def export_stops(stops_gdf: gpd.GeoDataFrame, output: str, format: Literal["GeoP
     ------
     ValueError
         If the input file is not correct (must be a GeoDataFrame, with no missing required colums, and a Point geometry)
+    
     OSError
         If there was an error when writing the file
         
