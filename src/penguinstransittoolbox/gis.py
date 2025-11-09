@@ -1,6 +1,5 @@
 """
-`gis`module
-===========
+`gis`module : 
 
 A module to work with `stops`and `shapes` as GIS files.
 """

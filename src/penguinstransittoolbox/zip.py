@@ -1,6 +1,5 @@
 """
-`zip` module
-============
+`zip` module :
 
 A module to read GTFS data from a ZIP file.
 

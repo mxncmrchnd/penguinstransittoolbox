@@ -1,6 +1,5 @@
 """
-`new` module
-============
+`new` module : 
 
 A module to create an empty feed.
 """
