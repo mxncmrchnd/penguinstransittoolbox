@@ -31,10 +31,16 @@
             <h2>API Documentation</h2>
                 <ul class="memberlist">
             <li>
+                    <a class="function" href="#export_shapes">export_shapes</a>
+            </li>
+            <li>
                     <a class="function" href="#export_stops">export_stops</a>
             </li>
             <li>
-                    <a class="function" href="#export_shapes">export_shapes</a>
+                    <a class="function" href="#shapes_from_gis">shapes_from_gis</a>
+            </li>
+            <li>
+                    <a class="function" href="#stops_from_gis">stops_from_gis</a>
             </li>
     </ul>
 
@@ -93,14 +99,14 @@
 </span><span id="L-34"><a href="#L-34"><span class="linenos"> 34</span></a>    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">shapes_gdf</span><span class="o">.</span><span class="n">geom_type</span> <span class="o">==</span> <span class="s2">&quot;LineString&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
 </span><span id="L-35"><a href="#L-35"><span class="linenos"> 35</span></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Some geometries in stops_gdf are not Point geometries.&quot;</span><span class="p">)</span>
 </span><span id="L-36"><a href="#L-36"><span class="linenos"> 36</span></a>    
-</span><span id="L-37"><a href="#L-37"><span class="linenos"> 37</span></a><span class="k">def</span><span class="w"> </span><span class="nf">export_stops</span><span class="p">(</span><span class="n">stops_gdf</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">,</span> <span class="n">output</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">format</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;GeoPackage&quot;</span><span class="p">,</span> <span class="s2">&quot;GeoJSON&quot;</span><span class="p">,</span> <span class="s2">&quot;Shapefile&quot;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;GeoPackage&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="L-37"><a href="#L-37"><span class="linenos"> 37</span></a><span class="k">def</span><span class="w"> </span><span class="nf">export_shapes</span><span class="p">(</span><span class="n">shapes_gdf</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">,</span> <span class="n">output</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">format</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;GeoPackage&quot;</span><span class="p">,</span> <span class="s2">&quot;GeoJSON&quot;</span><span class="p">,</span> <span class="s2">&quot;Shapefile&quot;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;GeoPackage&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 </span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a><span class="sd">    Exports a `stops` GeoDataFrame as a vector layer (gpkg, geojson or shp).</span>
+</span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a><span class="sd">    Exports a `shapes` GeoDataFrame as a vector layer (gpkg, geojson or shp).</span>
 </span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a>
 </span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a><span class="sd">    Parameters</span>
 </span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a><span class="sd">    ----------</span>
-</span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a><span class="sd">    stops_gdf : gpd.GeoDataFrame</span>
-</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a><span class="sd">        The GeoDataFrame containing the stops.</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a><span class="sd">    shapes_gdf : gpd.GeoDataFrame</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a><span class="sd">        The GeoDataFrame containing the shapes.</span>
 </span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a><span class="sd">    output : str</span>
 </span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a><span class="sd">        The output file path and name.</span>
 </span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a><span class="sd">    format : {&quot;GeoPackage&quot;, &quot;GeoJSON&quot;, &quot;Shapefile&quot;}, default &quot;GeoPackage&quot;</span>
@@ -109,13 +115,13 @@
 </span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a><span class="sd">    Raises</span>
 </span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a><span class="sd">    ------</span>
 </span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a><span class="sd">    ValueError</span>
-</span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a><span class="sd">        If the input file is not correct (must be a GeoDataFrame, with no missing required colums, and a Point geometry)</span>
+</span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a><span class="sd">        If the input file is not correct (must be a GeoDataFrame, with no missing required colums, and a LineString geometry)</span>
 </span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a><span class="sd">    OSError</span>
 </span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a><span class="sd">        If there was an error when writing the file</span>
 </span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a><span class="sd">        </span>
 </span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a>    <span class="c1"># Checks if the provided GeoDataFrame is valid</span>
-</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a>    <span class="n">_validate_stops</span><span class="p">(</span><span class="n">stops_gdf</span><span class="p">)</span>
+</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a>    <span class="n">_validate_shapes</span><span class="p">(</span><span class="n">shapes_gdf</span><span class="p">)</span>
 </span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a>    <span class="c1"># Checks if the format is a supported format</span>
 </span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a>    <span class="n">driver_map</span><span class="o">=</span><span class="p">{</span>
 </span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a>        <span class="s2">&quot;GeoPackage&quot;</span><span class="p">:</span> <span class="s2">&quot;GPKG&quot;</span><span class="p">,</span>
@@ -127,19 +133,19 @@
 </span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported format : </span><span class="si">{</span><span class="nb">format</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a>    <span class="c1"># Writes the file and prints a success message</span>
 </span><span id="L-70"><a href="#L-70"><span class="linenos"> 70</span></a>    <span class="k">try</span> <span class="p">:</span>
-</span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a>        <span class="n">stops_gdf</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="n">driver</span><span class="p">)</span>
-</span><span id="L-72"><a href="#L-72"><span class="linenos"> 72</span></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Stops correctly exported to </span><span class="si">{</span><span class="n">output</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a>        <span class="n">shapes_gdf</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="n">driver</span><span class="p">)</span>
+</span><span id="L-72"><a href="#L-72"><span class="linenos"> 72</span></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Shapes correctly exported to </span><span class="si">{</span><span class="n">output</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </span><span id="L-73"><a href="#L-73"><span class="linenos"> 73</span></a>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 </span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a>        <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to export shapes: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a>
-</span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a><span class="k">def</span><span class="w"> </span><span class="nf">export_shapes</span><span class="p">(</span><span class="n">shapes_gdf</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">,</span> <span class="n">output</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">format</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;GeoPackage&quot;</span><span class="p">,</span> <span class="s2">&quot;GeoJSON&quot;</span><span class="p">,</span> <span class="s2">&quot;Shapefile&quot;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;GeoPackage&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a><span class="k">def</span><span class="w"> </span><span class="nf">export_stops</span><span class="p">(</span><span class="n">stops_gdf</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">,</span> <span class="n">output</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">format</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;GeoPackage&quot;</span><span class="p">,</span> <span class="s2">&quot;GeoJSON&quot;</span><span class="p">,</span> <span class="s2">&quot;Shapefile&quot;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;GeoPackage&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 </span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a><span class="sd">    Exports a `shapes` GeoDataFrame as a vector layer (gpkg, geojson or shp).</span>
+</span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a><span class="sd">    Exports a `stops` GeoDataFrame as a vector layer (gpkg, geojson or shp).</span>
 </span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a>
 </span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a><span class="sd">    Parameters</span>
 </span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a><span class="sd">    ----------</span>
-</span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a><span class="sd">    shapes_gdf : gpd.GeoDataFrame</span>
-</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a><span class="sd">        The GeoDataFrame containing the shapes.</span>
+</span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a><span class="sd">    stops_gdf : gpd.GeoDataFrame</span>
+</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a><span class="sd">        The GeoDataFrame containing the stops.</span>
 </span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a><span class="sd">    output : str</span>
 </span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a><span class="sd">        The output file path and name.</span>
 </span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a><span class="sd">    format : {&quot;GeoPackage&quot;, &quot;GeoJSON&quot;, &quot;Shapefile&quot;}, default &quot;GeoPackage&quot;</span>
@@ -148,13 +154,13 @@
 </span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a><span class="sd">    Raises</span>
 </span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a><span class="sd">    ------</span>
 </span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a><span class="sd">    ValueError</span>
-</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a><span class="sd">        If the input file is not correct (must be a GeoDataFrame, with no missing required colums, and a LineString geometry)</span>
+</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a><span class="sd">        If the input file is not correct (must be a GeoDataFrame, with no missing required colums, and a Point geometry)</span>
 </span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a><span class="sd">    OSError</span>
 </span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a><span class="sd">        If there was an error when writing the file</span>
 </span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a><span class="sd">        </span>
 </span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a>    <span class="c1"># Checks if the provided GeoDataFrame is valid</span>
-</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a>    <span class="n">_validate_shapes</span><span class="p">(</span><span class="n">shapes_gdf</span><span class="p">)</span>
+</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a>    <span class="n">_validate_stops</span><span class="p">(</span><span class="n">stops_gdf</span><span class="p">)</span>
 </span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>    <span class="c1"># Checks if the format is a supported format</span>
 </span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a>    <span class="n">driver_map</span><span class="o">=</span><span class="p">{</span>
 </span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a>        <span class="s2">&quot;GeoPackage&quot;</span><span class="p">:</span> <span class="s2">&quot;GPKG&quot;</span><span class="p">,</span>
@@ -166,14 +172,180 @@
 </span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported format : </span><span class="si">{</span><span class="nb">format</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a>    <span class="c1"># Writes the file and prints a success message</span>
 </span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a>    <span class="k">try</span> <span class="p">:</span>
-</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a>        <span class="n">shapes_gdf</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="n">driver</span><span class="p">)</span>
-</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Shapes correctly exported to </span><span class="si">{</span><span class="n">output</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a>        <span class="n">stops_gdf</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="n">driver</span><span class="p">)</span>
+</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Stops correctly exported to </span><span class="si">{</span><span class="n">output</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 </span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a>        <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to export shapes: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a>    
+</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a><span class="k">def</span><span class="w"> </span><span class="nf">shapes_from_gis</span><span class="p">(</span><span class="n">shapes</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span> <span class="p">:</span>
+</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a><span class="sd">    Reads a `shapes` GeoDataFrame from a GIS file.</span>
+</span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a>
+</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a><span class="sd">    Parameters</span>
+</span><span id="L-120"><a href="#L-120"><span class="linenos">120</span></a><span class="sd">    ----------</span>
+</span><span id="L-121"><a href="#L-121"><span class="linenos">121</span></a><span class="sd">    shapes : str</span>
+</span><span id="L-122"><a href="#L-122"><span class="linenos">122</span></a><span class="sd">        The GIS file containing the `stops`.</span>
+</span><span id="L-123"><a href="#L-123"><span class="linenos">123</span></a>
+</span><span id="L-124"><a href="#L-124"><span class="linenos">124</span></a><span class="sd">    Returns</span>
+</span><span id="L-125"><a href="#L-125"><span class="linenos">125</span></a><span class="sd">    -------</span>
+</span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a><span class="sd">    shapes_gdf : geopandas.GeoDataFrame</span>
+</span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a><span class="sd">        A GeoDataFrame containing the the data, with the geometry as lines, in EPSG:4326.</span>
+</span><span id="L-128"><a href="#L-128"><span class="linenos">128</span></a>
+</span><span id="L-129"><a href="#L-129"><span class="linenos">129</span></a><span class="sd">    Raises</span>
+</span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a><span class="sd">    ------</span>
+</span><span id="L-131"><a href="#L-131"><span class="linenos">131</span></a><span class="sd">    ValueError</span>
+</span><span id="L-132"><a href="#L-132"><span class="linenos">132</span></a><span class="sd">        If any of the following conditions is met :</span>
+</span><span id="L-133"><a href="#L-133"><span class="linenos">133</span></a><span class="sd">        - The required field (`shape_id`) is not present ;</span>
+</span><span id="L-134"><a href="#L-134"><span class="linenos">134</span></a><span class="sd">        - The geometry is empty ;</span>
+</span><span id="L-135"><a href="#L-135"><span class="linenos">135</span></a><span class="sd">        - The geometry is not a line ;</span>
+</span><span id="L-136"><a href="#L-136"><span class="linenos">136</span></a><span class="sd">        - The CRS is not EPSG:4326.</span>
+</span><span id="L-137"><a href="#L-137"><span class="linenos">137</span></a>
+</span><span id="L-138"><a href="#L-138"><span class="linenos">138</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-139"><a href="#L-139"><span class="linenos">139</span></a>    <span class="c1"># Loads the shapes from a GIS file</span>
+</span><span id="L-140"><a href="#L-140"><span class="linenos">140</span></a>    <span class="n">shapes_gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">shapes</span><span class="p">)</span>
+</span><span id="L-141"><a href="#L-141"><span class="linenos">141</span></a>    <span class="c1"># Checks for the required fields</span>
+</span><span id="L-142"><a href="#L-142"><span class="linenos">142</span></a>    <span class="n">required_field</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;shape_id&quot;</span><span class="p">}</span>
+</span><span id="L-143"><a href="#L-143"><span class="linenos">143</span></a>    <span class="n">missing</span> <span class="o">=</span> <span class="n">required_field</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">shapes_gdf</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</span><span id="L-144"><a href="#L-144"><span class="linenos">144</span></a>    <span class="k">if</span> <span class="n">missing</span><span class="p">:</span>
+</span><span id="L-145"><a href="#L-145"><span class="linenos">145</span></a>      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing required shapes fields: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-146"><a href="#L-146"><span class="linenos">146</span></a>    <span class="c1"># Checks the geometry</span>
+</span><span id="L-147"><a href="#L-147"><span class="linenos">147</span></a>    <span class="k">if</span> <span class="n">shapes_gdf</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">is_empty</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+</span><span id="L-148"><a href="#L-148"><span class="linenos">148</span></a>      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Shape geometries contain empty features.&quot;</span><span class="p">)</span>
+</span><span id="L-149"><a href="#L-149"><span class="linenos">149</span></a>    <span class="n">valid_types</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;LineString&quot;</span><span class="p">,</span> <span class="s2">&quot;MultiLineString&quot;</span><span class="p">}</span>
+</span><span id="L-150"><a href="#L-150"><span class="linenos">150</span></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">shapes_gdf</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">valid_types</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+</span><span id="L-151"><a href="#L-151"><span class="linenos">151</span></a>      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Shape geometries must all be of type &#39;LineString&#39; or &#39;MultiLineString&#39;.&quot;</span><span class="p">)</span>
+</span><span id="L-152"><a href="#L-152"><span class="linenos">152</span></a>    <span class="c1"># Checks the CRS (if there is one, and if it is EPSG:4326)</span>
+</span><span id="L-153"><a href="#L-153"><span class="linenos">153</span></a>    <span class="k">if</span> <span class="n">shapes_gdf</span><span class="o">.</span><span class="n">crs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="L-154"><a href="#L-154"><span class="linenos">154</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: No CRS defined. Assuming EPSG:4326 (WGS84).&quot;</span><span class="p">)</span>
+</span><span id="L-155"><a href="#L-155"><span class="linenos">155</span></a>        <span class="n">shapes_gdf</span><span class="o">.</span><span class="n">set_crs</span><span class="p">(</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="L-156"><a href="#L-156"><span class="linenos">156</span></a>    <span class="k">if</span> <span class="n">shapes_gdf</span><span class="o">.</span><span class="n">crs</span><span class="o">.</span><span class="n">to_epsg</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">4326</span><span class="p">:</span>
+</span><span id="L-157"><a href="#L-157"><span class="linenos">157</span></a>      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid CRS: </span><span class="si">{</span><span class="n">shapes_gdf</span><span class="o">.</span><span class="n">crs</span><span class="si">}</span><span class="s2">. Expected EPSG:4326 (WGS84).&quot;</span><span class="p">)</span>
+</span><span id="L-158"><a href="#L-158"><span class="linenos">158</span></a>    <span class="c1"># Returns the GeoDataFrame</span>
+</span><span id="L-159"><a href="#L-159"><span class="linenos">159</span></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shapes correctly imported from GIS file&quot;</span><span class="p">)</span>
+</span><span id="L-160"><a href="#L-160"><span class="linenos">160</span></a>    <span class="k">return</span> <span class="n">shapes_gdf</span>
+</span><span id="L-161"><a href="#L-161"><span class="linenos">161</span></a>
+</span><span id="L-162"><a href="#L-162"><span class="linenos">162</span></a><span class="k">def</span><span class="w"> </span><span class="nf">stops_from_gis</span><span class="p">(</span><span class="n">stops</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span> <span class="p">:</span>
+</span><span id="L-163"><a href="#L-163"><span class="linenos">163</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-164"><a href="#L-164"><span class="linenos">164</span></a><span class="sd">    Reads a `stops` GeoDataFrame from a GIS file.</span>
+</span><span id="L-165"><a href="#L-165"><span class="linenos">165</span></a>
+</span><span id="L-166"><a href="#L-166"><span class="linenos">166</span></a><span class="sd">    Parameters</span>
+</span><span id="L-167"><a href="#L-167"><span class="linenos">167</span></a><span class="sd">    ----------</span>
+</span><span id="L-168"><a href="#L-168"><span class="linenos">168</span></a><span class="sd">    stops : str</span>
+</span><span id="L-169"><a href="#L-169"><span class="linenos">169</span></a><span class="sd">        The GIS file containing the `stops`.</span>
+</span><span id="L-170"><a href="#L-170"><span class="linenos">170</span></a>
+</span><span id="L-171"><a href="#L-171"><span class="linenos">171</span></a><span class="sd">    Returns</span>
+</span><span id="L-172"><a href="#L-172"><span class="linenos">172</span></a><span class="sd">    -------</span>
+</span><span id="L-173"><a href="#L-173"><span class="linenos">173</span></a><span class="sd">    stops_gdf : geopandas.GeoDataFrame</span>
+</span><span id="L-174"><a href="#L-174"><span class="linenos">174</span></a><span class="sd">        A GeoDataFrame containing the the data, with the geometry as points, in EPSG:4326.</span>
+</span><span id="L-175"><a href="#L-175"><span class="linenos">175</span></a>
+</span><span id="L-176"><a href="#L-176"><span class="linenos">176</span></a><span class="sd">    Raises</span>
+</span><span id="L-177"><a href="#L-177"><span class="linenos">177</span></a><span class="sd">    ------</span>
+</span><span id="L-178"><a href="#L-178"><span class="linenos">178</span></a><span class="sd">    ValueError</span>
+</span><span id="L-179"><a href="#L-179"><span class="linenos">179</span></a><span class="sd">        If any of the following conditions is met :</span>
+</span><span id="L-180"><a href="#L-180"><span class="linenos">180</span></a><span class="sd">        - The required fields (`stops_id` and `stop_name`) are not present ;</span>
+</span><span id="L-181"><a href="#L-181"><span class="linenos">181</span></a><span class="sd">        - The geometry is empty ;</span>
+</span><span id="L-182"><a href="#L-182"><span class="linenos">182</span></a><span class="sd">        - The geometry is not a point ;</span>
+</span><span id="L-183"><a href="#L-183"><span class="linenos">183</span></a><span class="sd">        - The CRS is not EPSG:4326.</span>
+</span><span id="L-184"><a href="#L-184"><span class="linenos">184</span></a>
+</span><span id="L-185"><a href="#L-185"><span class="linenos">185</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-186"><a href="#L-186"><span class="linenos">186</span></a>    <span class="c1"># Loads the stops from a GIS file</span>
+</span><span id="L-187"><a href="#L-187"><span class="linenos">187</span></a>    <span class="n">stops_gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">stops</span><span class="p">)</span>
+</span><span id="L-188"><a href="#L-188"><span class="linenos">188</span></a>    <span class="c1"># Checks for the required fields</span>
+</span><span id="L-189"><a href="#L-189"><span class="linenos">189</span></a>    <span class="n">required_fields</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;stop_id&quot;</span><span class="p">,</span> <span class="s2">&quot;stop_name&quot;</span><span class="p">}</span>
+</span><span id="L-190"><a href="#L-190"><span class="linenos">190</span></a>    <span class="n">missing</span> <span class="o">=</span> <span class="n">required_fields</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">stops_gdf</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</span><span id="L-191"><a href="#L-191"><span class="linenos">191</span></a>    <span class="k">if</span> <span class="n">missing</span><span class="p">:</span>
+</span><span id="L-192"><a href="#L-192"><span class="linenos">192</span></a>      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing required stop fields: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-193"><a href="#L-193"><span class="linenos">193</span></a>    <span class="c1"># Checks the geometry</span>
+</span><span id="L-194"><a href="#L-194"><span class="linenos">194</span></a>    <span class="k">if</span> <span class="n">stops_gdf</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">is_empty</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+</span><span id="L-195"><a href="#L-195"><span class="linenos">195</span></a>      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Stop geometries contain empty features.&quot;</span><span class="p">)</span>
+</span><span id="L-196"><a href="#L-196"><span class="linenos">196</span></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">stops_gdf</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s2">&quot;Point&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+</span><span id="L-197"><a href="#L-197"><span class="linenos">197</span></a>      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Stop geometries must all be of type &#39;Point&#39;.&quot;</span><span class="p">)</span>
+</span><span id="L-198"><a href="#L-198"><span class="linenos">198</span></a>    <span class="c1"># Checks the CRS (if there is one, and if it is EPSG:4326)</span>
+</span><span id="L-199"><a href="#L-199"><span class="linenos">199</span></a>    <span class="k">if</span> <span class="n">stops_gdf</span><span class="o">.</span><span class="n">crs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="L-200"><a href="#L-200"><span class="linenos">200</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: No CRS defined. Assuming EPSG:4326 (WGS84).&quot;</span><span class="p">)</span>
+</span><span id="L-201"><a href="#L-201"><span class="linenos">201</span></a>        <span class="n">stops_gdf</span><span class="o">.</span><span class="n">set_crs</span><span class="p">(</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="L-202"><a href="#L-202"><span class="linenos">202</span></a>    <span class="k">if</span> <span class="n">stops_gdf</span><span class="o">.</span><span class="n">crs</span><span class="o">.</span><span class="n">to_epsg</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">4326</span><span class="p">:</span>
+</span><span id="L-203"><a href="#L-203"><span class="linenos">203</span></a>      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid CRS: </span><span class="si">{</span><span class="n">stops_gdf</span><span class="o">.</span><span class="n">crs</span><span class="si">}</span><span class="s2">. Expected EPSG:4326 (WGS84).&quot;</span><span class="p">)</span>
+</span><span id="L-204"><a href="#L-204"><span class="linenos">204</span></a>    <span class="c1"># Returns the GeoDataFrame</span>
+</span><span id="L-205"><a href="#L-205"><span class="linenos">205</span></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stops correctly imported from GIS file&quot;</span><span class="p">)</span>
+</span><span id="L-206"><a href="#L-206"><span class="linenos">206</span></a>    <span class="k">return</span> <span class="n">stops_gdf</span>
 </span></pre></div>
 
 
             </section>
+                <section id="export_shapes">
+                            <input id="export_shapes-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">export_shapes</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">shapes_gdf</span><span class="p">:</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">geodataframe</span><span class="o">.</span><span class="n">GeoDataFrame</span>,</span><span class="param">	<span class="n">output</span><span class="p">:</span> <span class="nb">str</span>,</span><span class="param">	<span class="nb">format</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;GeoPackage&#39;</span><span class="p">,</span> <span class="s1">&#39;GeoJSON&#39;</span><span class="p">,</span> <span class="s1">&#39;Shapefile&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;GeoPackage&#39;</span></span><span class="return-annotation">) -> <span class="kc">None</span>:</span></span>
+
+                <label class="view-source-button" for="export_shapes-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#export_shapes"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="export_shapes-38"><a href="#export_shapes-38"><span class="linenos">38</span></a><span class="k">def</span><span class="w"> </span><span class="nf">export_shapes</span><span class="p">(</span><span class="n">shapes_gdf</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">,</span> <span class="n">output</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">format</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;GeoPackage&quot;</span><span class="p">,</span> <span class="s2">&quot;GeoJSON&quot;</span><span class="p">,</span> <span class="s2">&quot;Shapefile&quot;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;GeoPackage&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="export_shapes-39"><a href="#export_shapes-39"><span class="linenos">39</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="export_shapes-40"><a href="#export_shapes-40"><span class="linenos">40</span></a><span class="sd">    Exports a `shapes` GeoDataFrame as a vector layer (gpkg, geojson or shp).</span>
+</span><span id="export_shapes-41"><a href="#export_shapes-41"><span class="linenos">41</span></a>
+</span><span id="export_shapes-42"><a href="#export_shapes-42"><span class="linenos">42</span></a><span class="sd">    Parameters</span>
+</span><span id="export_shapes-43"><a href="#export_shapes-43"><span class="linenos">43</span></a><span class="sd">    ----------</span>
+</span><span id="export_shapes-44"><a href="#export_shapes-44"><span class="linenos">44</span></a><span class="sd">    shapes_gdf : gpd.GeoDataFrame</span>
+</span><span id="export_shapes-45"><a href="#export_shapes-45"><span class="linenos">45</span></a><span class="sd">        The GeoDataFrame containing the shapes.</span>
+</span><span id="export_shapes-46"><a href="#export_shapes-46"><span class="linenos">46</span></a><span class="sd">    output : str</span>
+</span><span id="export_shapes-47"><a href="#export_shapes-47"><span class="linenos">47</span></a><span class="sd">        The output file path and name.</span>
+</span><span id="export_shapes-48"><a href="#export_shapes-48"><span class="linenos">48</span></a><span class="sd">    format : {&quot;GeoPackage&quot;, &quot;GeoJSON&quot;, &quot;Shapefile&quot;}, default &quot;GeoPackage&quot;</span>
+</span><span id="export_shapes-49"><a href="#export_shapes-49"><span class="linenos">49</span></a><span class="sd">        The output file format</span>
+</span><span id="export_shapes-50"><a href="#export_shapes-50"><span class="linenos">50</span></a>
+</span><span id="export_shapes-51"><a href="#export_shapes-51"><span class="linenos">51</span></a><span class="sd">    Raises</span>
+</span><span id="export_shapes-52"><a href="#export_shapes-52"><span class="linenos">52</span></a><span class="sd">    ------</span>
+</span><span id="export_shapes-53"><a href="#export_shapes-53"><span class="linenos">53</span></a><span class="sd">    ValueError</span>
+</span><span id="export_shapes-54"><a href="#export_shapes-54"><span class="linenos">54</span></a><span class="sd">        If the input file is not correct (must be a GeoDataFrame, with no missing required colums, and a LineString geometry)</span>
+</span><span id="export_shapes-55"><a href="#export_shapes-55"><span class="linenos">55</span></a><span class="sd">    OSError</span>
+</span><span id="export_shapes-56"><a href="#export_shapes-56"><span class="linenos">56</span></a><span class="sd">        If there was an error when writing the file</span>
+</span><span id="export_shapes-57"><a href="#export_shapes-57"><span class="linenos">57</span></a><span class="sd">        </span>
+</span><span id="export_shapes-58"><a href="#export_shapes-58"><span class="linenos">58</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="export_shapes-59"><a href="#export_shapes-59"><span class="linenos">59</span></a>    <span class="c1"># Checks if the provided GeoDataFrame is valid</span>
+</span><span id="export_shapes-60"><a href="#export_shapes-60"><span class="linenos">60</span></a>    <span class="n">_validate_shapes</span><span class="p">(</span><span class="n">shapes_gdf</span><span class="p">)</span>
+</span><span id="export_shapes-61"><a href="#export_shapes-61"><span class="linenos">61</span></a>    <span class="c1"># Checks if the format is a supported format</span>
+</span><span id="export_shapes-62"><a href="#export_shapes-62"><span class="linenos">62</span></a>    <span class="n">driver_map</span><span class="o">=</span><span class="p">{</span>
+</span><span id="export_shapes-63"><a href="#export_shapes-63"><span class="linenos">63</span></a>        <span class="s2">&quot;GeoPackage&quot;</span><span class="p">:</span> <span class="s2">&quot;GPKG&quot;</span><span class="p">,</span>
+</span><span id="export_shapes-64"><a href="#export_shapes-64"><span class="linenos">64</span></a>        <span class="s2">&quot;GeoJSON&quot;</span><span class="p">:</span> <span class="s2">&quot;GeoJSON&quot;</span><span class="p">,</span>
+</span><span id="export_shapes-65"><a href="#export_shapes-65"><span class="linenos">65</span></a>        <span class="s2">&quot;Shapefile&quot;</span><span class="p">:</span> <span class="s2">&quot;ESRI Shapefile&quot;</span>
+</span><span id="export_shapes-66"><a href="#export_shapes-66"><span class="linenos">66</span></a>    <span class="p">}</span>
+</span><span id="export_shapes-67"><a href="#export_shapes-67"><span class="linenos">67</span></a>    <span class="n">driver</span> <span class="o">=</span> <span class="n">driver_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">format</span><span class="p">)</span>
+</span><span id="export_shapes-68"><a href="#export_shapes-68"><span class="linenos">68</span></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">driver</span><span class="p">:</span>
+</span><span id="export_shapes-69"><a href="#export_shapes-69"><span class="linenos">69</span></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported format : </span><span class="si">{</span><span class="nb">format</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="export_shapes-70"><a href="#export_shapes-70"><span class="linenos">70</span></a>    <span class="c1"># Writes the file and prints a success message</span>
+</span><span id="export_shapes-71"><a href="#export_shapes-71"><span class="linenos">71</span></a>    <span class="k">try</span> <span class="p">:</span>
+</span><span id="export_shapes-72"><a href="#export_shapes-72"><span class="linenos">72</span></a>        <span class="n">shapes_gdf</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="n">driver</span><span class="p">)</span>
+</span><span id="export_shapes-73"><a href="#export_shapes-73"><span class="linenos">73</span></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Shapes correctly exported to </span><span class="si">{</span><span class="n">output</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="export_shapes-74"><a href="#export_shapes-74"><span class="linenos">74</span></a>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span id="export_shapes-75"><a href="#export_shapes-75"><span class="linenos">75</span></a>        <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to export shapes: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Exports a <code>shapes</code> GeoDataFrame as a vector layer (gpkg, geojson or shp).</p>
+
+<h2 id="parameters">Parameters</h2>
+
+<p>shapes_gdf : gpd.GeoDataFrame
+    The GeoDataFrame containing the shapes.
+output : str
+    The output file path and name.
+format : {"GeoPackage", "GeoJSON", "Shapefile"}, default "GeoPackage"
+    The output file format</p>
+
+<h2 id="raises">Raises</h2>
+
+<p>ValueError
+    If the input file is not correct (must be a GeoDataFrame, with no missing required colums, and a LineString geometry)
+OSError
+    If there was an error when writing the file</p>
+</div>
+
+
+                </section>
                 <section id="export_stops">
                             <input id="export_stops-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr function">
@@ -185,44 +357,44 @@
 
     </div>
     <a class="headerlink" href="#export_stops"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="export_stops-38"><a href="#export_stops-38"><span class="linenos">38</span></a><span class="k">def</span><span class="w"> </span><span class="nf">export_stops</span><span class="p">(</span><span class="n">stops_gdf</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">,</span> <span class="n">output</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">format</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;GeoPackage&quot;</span><span class="p">,</span> <span class="s2">&quot;GeoJSON&quot;</span><span class="p">,</span> <span class="s2">&quot;Shapefile&quot;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;GeoPackage&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="export_stops-39"><a href="#export_stops-39"><span class="linenos">39</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="export_stops-40"><a href="#export_stops-40"><span class="linenos">40</span></a><span class="sd">    Exports a `stops` GeoDataFrame as a vector layer (gpkg, geojson or shp).</span>
-</span><span id="export_stops-41"><a href="#export_stops-41"><span class="linenos">41</span></a>
-</span><span id="export_stops-42"><a href="#export_stops-42"><span class="linenos">42</span></a><span class="sd">    Parameters</span>
-</span><span id="export_stops-43"><a href="#export_stops-43"><span class="linenos">43</span></a><span class="sd">    ----------</span>
-</span><span id="export_stops-44"><a href="#export_stops-44"><span class="linenos">44</span></a><span class="sd">    stops_gdf : gpd.GeoDataFrame</span>
-</span><span id="export_stops-45"><a href="#export_stops-45"><span class="linenos">45</span></a><span class="sd">        The GeoDataFrame containing the stops.</span>
-</span><span id="export_stops-46"><a href="#export_stops-46"><span class="linenos">46</span></a><span class="sd">    output : str</span>
-</span><span id="export_stops-47"><a href="#export_stops-47"><span class="linenos">47</span></a><span class="sd">        The output file path and name.</span>
-</span><span id="export_stops-48"><a href="#export_stops-48"><span class="linenos">48</span></a><span class="sd">    format : {&quot;GeoPackage&quot;, &quot;GeoJSON&quot;, &quot;Shapefile&quot;}, default &quot;GeoPackage&quot;</span>
-</span><span id="export_stops-49"><a href="#export_stops-49"><span class="linenos">49</span></a><span class="sd">        The output file format</span>
-</span><span id="export_stops-50"><a href="#export_stops-50"><span class="linenos">50</span></a>
-</span><span id="export_stops-51"><a href="#export_stops-51"><span class="linenos">51</span></a><span class="sd">    Raises</span>
-</span><span id="export_stops-52"><a href="#export_stops-52"><span class="linenos">52</span></a><span class="sd">    ------</span>
-</span><span id="export_stops-53"><a href="#export_stops-53"><span class="linenos">53</span></a><span class="sd">    ValueError</span>
-</span><span id="export_stops-54"><a href="#export_stops-54"><span class="linenos">54</span></a><span class="sd">        If the input file is not correct (must be a GeoDataFrame, with no missing required colums, and a Point geometry)</span>
-</span><span id="export_stops-55"><a href="#export_stops-55"><span class="linenos">55</span></a><span class="sd">    OSError</span>
-</span><span id="export_stops-56"><a href="#export_stops-56"><span class="linenos">56</span></a><span class="sd">        If there was an error when writing the file</span>
-</span><span id="export_stops-57"><a href="#export_stops-57"><span class="linenos">57</span></a><span class="sd">        </span>
-</span><span id="export_stops-58"><a href="#export_stops-58"><span class="linenos">58</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="export_stops-59"><a href="#export_stops-59"><span class="linenos">59</span></a>    <span class="c1"># Checks if the provided GeoDataFrame is valid</span>
-</span><span id="export_stops-60"><a href="#export_stops-60"><span class="linenos">60</span></a>    <span class="n">_validate_stops</span><span class="p">(</span><span class="n">stops_gdf</span><span class="p">)</span>
-</span><span id="export_stops-61"><a href="#export_stops-61"><span class="linenos">61</span></a>    <span class="c1"># Checks if the format is a supported format</span>
-</span><span id="export_stops-62"><a href="#export_stops-62"><span class="linenos">62</span></a>    <span class="n">driver_map</span><span class="o">=</span><span class="p">{</span>
-</span><span id="export_stops-63"><a href="#export_stops-63"><span class="linenos">63</span></a>        <span class="s2">&quot;GeoPackage&quot;</span><span class="p">:</span> <span class="s2">&quot;GPKG&quot;</span><span class="p">,</span>
-</span><span id="export_stops-64"><a href="#export_stops-64"><span class="linenos">64</span></a>        <span class="s2">&quot;GeoJSON&quot;</span><span class="p">:</span> <span class="s2">&quot;GeoJSON&quot;</span><span class="p">,</span>
-</span><span id="export_stops-65"><a href="#export_stops-65"><span class="linenos">65</span></a>        <span class="s2">&quot;Shapefile&quot;</span><span class="p">:</span> <span class="s2">&quot;ESRI Shapefile&quot;</span>
-</span><span id="export_stops-66"><a href="#export_stops-66"><span class="linenos">66</span></a>    <span class="p">}</span>
-</span><span id="export_stops-67"><a href="#export_stops-67"><span class="linenos">67</span></a>    <span class="n">driver</span> <span class="o">=</span> <span class="n">driver_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">format</span><span class="p">)</span>
-</span><span id="export_stops-68"><a href="#export_stops-68"><span class="linenos">68</span></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">driver</span><span class="p">:</span>
-</span><span id="export_stops-69"><a href="#export_stops-69"><span class="linenos">69</span></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported format : </span><span class="si">{</span><span class="nb">format</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="export_stops-70"><a href="#export_stops-70"><span class="linenos">70</span></a>    <span class="c1"># Writes the file and prints a success message</span>
-</span><span id="export_stops-71"><a href="#export_stops-71"><span class="linenos">71</span></a>    <span class="k">try</span> <span class="p">:</span>
-</span><span id="export_stops-72"><a href="#export_stops-72"><span class="linenos">72</span></a>        <span class="n">stops_gdf</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="n">driver</span><span class="p">)</span>
-</span><span id="export_stops-73"><a href="#export_stops-73"><span class="linenos">73</span></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Stops correctly exported to </span><span class="si">{</span><span class="n">output</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="export_stops-74"><a href="#export_stops-74"><span class="linenos">74</span></a>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-</span><span id="export_stops-75"><a href="#export_stops-75"><span class="linenos">75</span></a>        <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to export shapes: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="export_stops-77"><a href="#export_stops-77"><span class="linenos"> 77</span></a><span class="k">def</span><span class="w"> </span><span class="nf">export_stops</span><span class="p">(</span><span class="n">stops_gdf</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">,</span> <span class="n">output</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">format</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;GeoPackage&quot;</span><span class="p">,</span> <span class="s2">&quot;GeoJSON&quot;</span><span class="p">,</span> <span class="s2">&quot;Shapefile&quot;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;GeoPackage&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="export_stops-78"><a href="#export_stops-78"><span class="linenos"> 78</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="export_stops-79"><a href="#export_stops-79"><span class="linenos"> 79</span></a><span class="sd">    Exports a `stops` GeoDataFrame as a vector layer (gpkg, geojson or shp).</span>
+</span><span id="export_stops-80"><a href="#export_stops-80"><span class="linenos"> 80</span></a>
+</span><span id="export_stops-81"><a href="#export_stops-81"><span class="linenos"> 81</span></a><span class="sd">    Parameters</span>
+</span><span id="export_stops-82"><a href="#export_stops-82"><span class="linenos"> 82</span></a><span class="sd">    ----------</span>
+</span><span id="export_stops-83"><a href="#export_stops-83"><span class="linenos"> 83</span></a><span class="sd">    stops_gdf : gpd.GeoDataFrame</span>
+</span><span id="export_stops-84"><a href="#export_stops-84"><span class="linenos"> 84</span></a><span class="sd">        The GeoDataFrame containing the stops.</span>
+</span><span id="export_stops-85"><a href="#export_stops-85"><span class="linenos"> 85</span></a><span class="sd">    output : str</span>
+</span><span id="export_stops-86"><a href="#export_stops-86"><span class="linenos"> 86</span></a><span class="sd">        The output file path and name.</span>
+</span><span id="export_stops-87"><a href="#export_stops-87"><span class="linenos"> 87</span></a><span class="sd">    format : {&quot;GeoPackage&quot;, &quot;GeoJSON&quot;, &quot;Shapefile&quot;}, default &quot;GeoPackage&quot;</span>
+</span><span id="export_stops-88"><a href="#export_stops-88"><span class="linenos"> 88</span></a><span class="sd">        The output file format</span>
+</span><span id="export_stops-89"><a href="#export_stops-89"><span class="linenos"> 89</span></a>
+</span><span id="export_stops-90"><a href="#export_stops-90"><span class="linenos"> 90</span></a><span class="sd">    Raises</span>
+</span><span id="export_stops-91"><a href="#export_stops-91"><span class="linenos"> 91</span></a><span class="sd">    ------</span>
+</span><span id="export_stops-92"><a href="#export_stops-92"><span class="linenos"> 92</span></a><span class="sd">    ValueError</span>
+</span><span id="export_stops-93"><a href="#export_stops-93"><span class="linenos"> 93</span></a><span class="sd">        If the input file is not correct (must be a GeoDataFrame, with no missing required colums, and a Point geometry)</span>
+</span><span id="export_stops-94"><a href="#export_stops-94"><span class="linenos"> 94</span></a><span class="sd">    OSError</span>
+</span><span id="export_stops-95"><a href="#export_stops-95"><span class="linenos"> 95</span></a><span class="sd">        If there was an error when writing the file</span>
+</span><span id="export_stops-96"><a href="#export_stops-96"><span class="linenos"> 96</span></a><span class="sd">        </span>
+</span><span id="export_stops-97"><a href="#export_stops-97"><span class="linenos"> 97</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="export_stops-98"><a href="#export_stops-98"><span class="linenos"> 98</span></a>    <span class="c1"># Checks if the provided GeoDataFrame is valid</span>
+</span><span id="export_stops-99"><a href="#export_stops-99"><span class="linenos"> 99</span></a>    <span class="n">_validate_stops</span><span class="p">(</span><span class="n">stops_gdf</span><span class="p">)</span>
+</span><span id="export_stops-100"><a href="#export_stops-100"><span class="linenos">100</span></a>    <span class="c1"># Checks if the format is a supported format</span>
+</span><span id="export_stops-101"><a href="#export_stops-101"><span class="linenos">101</span></a>    <span class="n">driver_map</span><span class="o">=</span><span class="p">{</span>
+</span><span id="export_stops-102"><a href="#export_stops-102"><span class="linenos">102</span></a>        <span class="s2">&quot;GeoPackage&quot;</span><span class="p">:</span> <span class="s2">&quot;GPKG&quot;</span><span class="p">,</span>
+</span><span id="export_stops-103"><a href="#export_stops-103"><span class="linenos">103</span></a>        <span class="s2">&quot;GeoJSON&quot;</span><span class="p">:</span> <span class="s2">&quot;GeoJSON&quot;</span><span class="p">,</span>
+</span><span id="export_stops-104"><a href="#export_stops-104"><span class="linenos">104</span></a>        <span class="s2">&quot;Shapefile&quot;</span><span class="p">:</span> <span class="s2">&quot;ESRI Shapefile&quot;</span>
+</span><span id="export_stops-105"><a href="#export_stops-105"><span class="linenos">105</span></a>    <span class="p">}</span>
+</span><span id="export_stops-106"><a href="#export_stops-106"><span class="linenos">106</span></a>    <span class="n">driver</span> <span class="o">=</span> <span class="n">driver_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">format</span><span class="p">)</span>
+</span><span id="export_stops-107"><a href="#export_stops-107"><span class="linenos">107</span></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">driver</span><span class="p">:</span>
+</span><span id="export_stops-108"><a href="#export_stops-108"><span class="linenos">108</span></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported format : </span><span class="si">{</span><span class="nb">format</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="export_stops-109"><a href="#export_stops-109"><span class="linenos">109</span></a>    <span class="c1"># Writes the file and prints a success message</span>
+</span><span id="export_stops-110"><a href="#export_stops-110"><span class="linenos">110</span></a>    <span class="k">try</span> <span class="p">:</span>
+</span><span id="export_stops-111"><a href="#export_stops-111"><span class="linenos">111</span></a>        <span class="n">stops_gdf</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="n">driver</span><span class="p">)</span>
+</span><span id="export_stops-112"><a href="#export_stops-112"><span class="linenos">112</span></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Stops correctly exported to </span><span class="si">{</span><span class="n">output</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="export_stops-113"><a href="#export_stops-113"><span class="linenos">113</span></a>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span id="export_stops-114"><a href="#export_stops-114"><span class="linenos">114</span></a>        <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to export shapes: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -247,75 +419,169 @@ OSError
 
 
                 </section>
-                <section id="export_shapes">
-                            <input id="export_shapes-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+                <section id="shapes_from_gis">
+                            <input id="shapes_from_gis-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">export_shapes</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">shapes_gdf</span><span class="p">:</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">geodataframe</span><span class="o">.</span><span class="n">GeoDataFrame</span>,</span><span class="param">	<span class="n">output</span><span class="p">:</span> <span class="nb">str</span>,</span><span class="param">	<span class="nb">format</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;GeoPackage&#39;</span><span class="p">,</span> <span class="s1">&#39;GeoJSON&#39;</span><span class="p">,</span> <span class="s1">&#39;Shapefile&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;GeoPackage&#39;</span></span><span class="return-annotation">) -> <span class="kc">None</span>:</span></span>
+        <span class="name">shapes_from_gis</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">shapes</span><span class="p">:</span> <span class="nb">str</span></span><span class="return-annotation">) -> <span class="n">geopandas</span><span class="o">.</span><span class="n">geodataframe</span><span class="o">.</span><span class="n">GeoDataFrame</span>:</span></span>
 
-                <label class="view-source-button" for="export_shapes-view-source"><span>View Source</span></label>
+                <label class="view-source-button" for="shapes_from_gis-view-source"><span>View Source</span></label>
 
     </div>
-    <a class="headerlink" href="#export_shapes"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="export_shapes-77"><a href="#export_shapes-77"><span class="linenos"> 77</span></a><span class="k">def</span><span class="w"> </span><span class="nf">export_shapes</span><span class="p">(</span><span class="n">shapes_gdf</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">,</span> <span class="n">output</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">format</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;GeoPackage&quot;</span><span class="p">,</span> <span class="s2">&quot;GeoJSON&quot;</span><span class="p">,</span> <span class="s2">&quot;Shapefile&quot;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;GeoPackage&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="export_shapes-78"><a href="#export_shapes-78"><span class="linenos"> 78</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="export_shapes-79"><a href="#export_shapes-79"><span class="linenos"> 79</span></a><span class="sd">    Exports a `shapes` GeoDataFrame as a vector layer (gpkg, geojson or shp).</span>
-</span><span id="export_shapes-80"><a href="#export_shapes-80"><span class="linenos"> 80</span></a>
-</span><span id="export_shapes-81"><a href="#export_shapes-81"><span class="linenos"> 81</span></a><span class="sd">    Parameters</span>
-</span><span id="export_shapes-82"><a href="#export_shapes-82"><span class="linenos"> 82</span></a><span class="sd">    ----------</span>
-</span><span id="export_shapes-83"><a href="#export_shapes-83"><span class="linenos"> 83</span></a><span class="sd">    shapes_gdf : gpd.GeoDataFrame</span>
-</span><span id="export_shapes-84"><a href="#export_shapes-84"><span class="linenos"> 84</span></a><span class="sd">        The GeoDataFrame containing the shapes.</span>
-</span><span id="export_shapes-85"><a href="#export_shapes-85"><span class="linenos"> 85</span></a><span class="sd">    output : str</span>
-</span><span id="export_shapes-86"><a href="#export_shapes-86"><span class="linenos"> 86</span></a><span class="sd">        The output file path and name.</span>
-</span><span id="export_shapes-87"><a href="#export_shapes-87"><span class="linenos"> 87</span></a><span class="sd">    format : {&quot;GeoPackage&quot;, &quot;GeoJSON&quot;, &quot;Shapefile&quot;}, default &quot;GeoPackage&quot;</span>
-</span><span id="export_shapes-88"><a href="#export_shapes-88"><span class="linenos"> 88</span></a><span class="sd">        The output file format</span>
-</span><span id="export_shapes-89"><a href="#export_shapes-89"><span class="linenos"> 89</span></a>
-</span><span id="export_shapes-90"><a href="#export_shapes-90"><span class="linenos"> 90</span></a><span class="sd">    Raises</span>
-</span><span id="export_shapes-91"><a href="#export_shapes-91"><span class="linenos"> 91</span></a><span class="sd">    ------</span>
-</span><span id="export_shapes-92"><a href="#export_shapes-92"><span class="linenos"> 92</span></a><span class="sd">    ValueError</span>
-</span><span id="export_shapes-93"><a href="#export_shapes-93"><span class="linenos"> 93</span></a><span class="sd">        If the input file is not correct (must be a GeoDataFrame, with no missing required colums, and a LineString geometry)</span>
-</span><span id="export_shapes-94"><a href="#export_shapes-94"><span class="linenos"> 94</span></a><span class="sd">    OSError</span>
-</span><span id="export_shapes-95"><a href="#export_shapes-95"><span class="linenos"> 95</span></a><span class="sd">        If there was an error when writing the file</span>
-</span><span id="export_shapes-96"><a href="#export_shapes-96"><span class="linenos"> 96</span></a><span class="sd">        </span>
-</span><span id="export_shapes-97"><a href="#export_shapes-97"><span class="linenos"> 97</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="export_shapes-98"><a href="#export_shapes-98"><span class="linenos"> 98</span></a>    <span class="c1"># Checks if the provided GeoDataFrame is valid</span>
-</span><span id="export_shapes-99"><a href="#export_shapes-99"><span class="linenos"> 99</span></a>    <span class="n">_validate_shapes</span><span class="p">(</span><span class="n">shapes_gdf</span><span class="p">)</span>
-</span><span id="export_shapes-100"><a href="#export_shapes-100"><span class="linenos">100</span></a>    <span class="c1"># Checks if the format is a supported format</span>
-</span><span id="export_shapes-101"><a href="#export_shapes-101"><span class="linenos">101</span></a>    <span class="n">driver_map</span><span class="o">=</span><span class="p">{</span>
-</span><span id="export_shapes-102"><a href="#export_shapes-102"><span class="linenos">102</span></a>        <span class="s2">&quot;GeoPackage&quot;</span><span class="p">:</span> <span class="s2">&quot;GPKG&quot;</span><span class="p">,</span>
-</span><span id="export_shapes-103"><a href="#export_shapes-103"><span class="linenos">103</span></a>        <span class="s2">&quot;GeoJSON&quot;</span><span class="p">:</span> <span class="s2">&quot;GeoJSON&quot;</span><span class="p">,</span>
-</span><span id="export_shapes-104"><a href="#export_shapes-104"><span class="linenos">104</span></a>        <span class="s2">&quot;Shapefile&quot;</span><span class="p">:</span> <span class="s2">&quot;ESRI Shapefile&quot;</span>
-</span><span id="export_shapes-105"><a href="#export_shapes-105"><span class="linenos">105</span></a>    <span class="p">}</span>
-</span><span id="export_shapes-106"><a href="#export_shapes-106"><span class="linenos">106</span></a>    <span class="n">driver</span> <span class="o">=</span> <span class="n">driver_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">format</span><span class="p">)</span>
-</span><span id="export_shapes-107"><a href="#export_shapes-107"><span class="linenos">107</span></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">driver</span><span class="p">:</span>
-</span><span id="export_shapes-108"><a href="#export_shapes-108"><span class="linenos">108</span></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported format : </span><span class="si">{</span><span class="nb">format</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="export_shapes-109"><a href="#export_shapes-109"><span class="linenos">109</span></a>    <span class="c1"># Writes the file and prints a success message</span>
-</span><span id="export_shapes-110"><a href="#export_shapes-110"><span class="linenos">110</span></a>    <span class="k">try</span> <span class="p">:</span>
-</span><span id="export_shapes-111"><a href="#export_shapes-111"><span class="linenos">111</span></a>        <span class="n">shapes_gdf</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="n">driver</span><span class="p">)</span>
-</span><span id="export_shapes-112"><a href="#export_shapes-112"><span class="linenos">112</span></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Shapes correctly exported to </span><span class="si">{</span><span class="n">output</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="export_shapes-113"><a href="#export_shapes-113"><span class="linenos">113</span></a>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-</span><span id="export_shapes-114"><a href="#export_shapes-114"><span class="linenos">114</span></a>        <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to export shapes: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <a class="headerlink" href="#shapes_from_gis"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="shapes_from_gis-116"><a href="#shapes_from_gis-116"><span class="linenos">116</span></a><span class="k">def</span><span class="w"> </span><span class="nf">shapes_from_gis</span><span class="p">(</span><span class="n">shapes</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span> <span class="p">:</span>
+</span><span id="shapes_from_gis-117"><a href="#shapes_from_gis-117"><span class="linenos">117</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="shapes_from_gis-118"><a href="#shapes_from_gis-118"><span class="linenos">118</span></a><span class="sd">    Reads a `shapes` GeoDataFrame from a GIS file.</span>
+</span><span id="shapes_from_gis-119"><a href="#shapes_from_gis-119"><span class="linenos">119</span></a>
+</span><span id="shapes_from_gis-120"><a href="#shapes_from_gis-120"><span class="linenos">120</span></a><span class="sd">    Parameters</span>
+</span><span id="shapes_from_gis-121"><a href="#shapes_from_gis-121"><span class="linenos">121</span></a><span class="sd">    ----------</span>
+</span><span id="shapes_from_gis-122"><a href="#shapes_from_gis-122"><span class="linenos">122</span></a><span class="sd">    shapes : str</span>
+</span><span id="shapes_from_gis-123"><a href="#shapes_from_gis-123"><span class="linenos">123</span></a><span class="sd">        The GIS file containing the `stops`.</span>
+</span><span id="shapes_from_gis-124"><a href="#shapes_from_gis-124"><span class="linenos">124</span></a>
+</span><span id="shapes_from_gis-125"><a href="#shapes_from_gis-125"><span class="linenos">125</span></a><span class="sd">    Returns</span>
+</span><span id="shapes_from_gis-126"><a href="#shapes_from_gis-126"><span class="linenos">126</span></a><span class="sd">    -------</span>
+</span><span id="shapes_from_gis-127"><a href="#shapes_from_gis-127"><span class="linenos">127</span></a><span class="sd">    shapes_gdf : geopandas.GeoDataFrame</span>
+</span><span id="shapes_from_gis-128"><a href="#shapes_from_gis-128"><span class="linenos">128</span></a><span class="sd">        A GeoDataFrame containing the the data, with the geometry as lines, in EPSG:4326.</span>
+</span><span id="shapes_from_gis-129"><a href="#shapes_from_gis-129"><span class="linenos">129</span></a>
+</span><span id="shapes_from_gis-130"><a href="#shapes_from_gis-130"><span class="linenos">130</span></a><span class="sd">    Raises</span>
+</span><span id="shapes_from_gis-131"><a href="#shapes_from_gis-131"><span class="linenos">131</span></a><span class="sd">    ------</span>
+</span><span id="shapes_from_gis-132"><a href="#shapes_from_gis-132"><span class="linenos">132</span></a><span class="sd">    ValueError</span>
+</span><span id="shapes_from_gis-133"><a href="#shapes_from_gis-133"><span class="linenos">133</span></a><span class="sd">        If any of the following conditions is met :</span>
+</span><span id="shapes_from_gis-134"><a href="#shapes_from_gis-134"><span class="linenos">134</span></a><span class="sd">        - The required field (`shape_id`) is not present ;</span>
+</span><span id="shapes_from_gis-135"><a href="#shapes_from_gis-135"><span class="linenos">135</span></a><span class="sd">        - The geometry is empty ;</span>
+</span><span id="shapes_from_gis-136"><a href="#shapes_from_gis-136"><span class="linenos">136</span></a><span class="sd">        - The geometry is not a line ;</span>
+</span><span id="shapes_from_gis-137"><a href="#shapes_from_gis-137"><span class="linenos">137</span></a><span class="sd">        - The CRS is not EPSG:4326.</span>
+</span><span id="shapes_from_gis-138"><a href="#shapes_from_gis-138"><span class="linenos">138</span></a>
+</span><span id="shapes_from_gis-139"><a href="#shapes_from_gis-139"><span class="linenos">139</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="shapes_from_gis-140"><a href="#shapes_from_gis-140"><span class="linenos">140</span></a>    <span class="c1"># Loads the shapes from a GIS file</span>
+</span><span id="shapes_from_gis-141"><a href="#shapes_from_gis-141"><span class="linenos">141</span></a>    <span class="n">shapes_gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">shapes</span><span class="p">)</span>
+</span><span id="shapes_from_gis-142"><a href="#shapes_from_gis-142"><span class="linenos">142</span></a>    <span class="c1"># Checks for the required fields</span>
+</span><span id="shapes_from_gis-143"><a href="#shapes_from_gis-143"><span class="linenos">143</span></a>    <span class="n">required_field</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;shape_id&quot;</span><span class="p">}</span>
+</span><span id="shapes_from_gis-144"><a href="#shapes_from_gis-144"><span class="linenos">144</span></a>    <span class="n">missing</span> <span class="o">=</span> <span class="n">required_field</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">shapes_gdf</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</span><span id="shapes_from_gis-145"><a href="#shapes_from_gis-145"><span class="linenos">145</span></a>    <span class="k">if</span> <span class="n">missing</span><span class="p">:</span>
+</span><span id="shapes_from_gis-146"><a href="#shapes_from_gis-146"><span class="linenos">146</span></a>      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing required shapes fields: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="shapes_from_gis-147"><a href="#shapes_from_gis-147"><span class="linenos">147</span></a>    <span class="c1"># Checks the geometry</span>
+</span><span id="shapes_from_gis-148"><a href="#shapes_from_gis-148"><span class="linenos">148</span></a>    <span class="k">if</span> <span class="n">shapes_gdf</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">is_empty</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+</span><span id="shapes_from_gis-149"><a href="#shapes_from_gis-149"><span class="linenos">149</span></a>      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Shape geometries contain empty features.&quot;</span><span class="p">)</span>
+</span><span id="shapes_from_gis-150"><a href="#shapes_from_gis-150"><span class="linenos">150</span></a>    <span class="n">valid_types</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;LineString&quot;</span><span class="p">,</span> <span class="s2">&quot;MultiLineString&quot;</span><span class="p">}</span>
+</span><span id="shapes_from_gis-151"><a href="#shapes_from_gis-151"><span class="linenos">151</span></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">shapes_gdf</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">valid_types</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+</span><span id="shapes_from_gis-152"><a href="#shapes_from_gis-152"><span class="linenos">152</span></a>      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Shape geometries must all be of type &#39;LineString&#39; or &#39;MultiLineString&#39;.&quot;</span><span class="p">)</span>
+</span><span id="shapes_from_gis-153"><a href="#shapes_from_gis-153"><span class="linenos">153</span></a>    <span class="c1"># Checks the CRS (if there is one, and if it is EPSG:4326)</span>
+</span><span id="shapes_from_gis-154"><a href="#shapes_from_gis-154"><span class="linenos">154</span></a>    <span class="k">if</span> <span class="n">shapes_gdf</span><span class="o">.</span><span class="n">crs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="shapes_from_gis-155"><a href="#shapes_from_gis-155"><span class="linenos">155</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: No CRS defined. Assuming EPSG:4326 (WGS84).&quot;</span><span class="p">)</span>
+</span><span id="shapes_from_gis-156"><a href="#shapes_from_gis-156"><span class="linenos">156</span></a>        <span class="n">shapes_gdf</span><span class="o">.</span><span class="n">set_crs</span><span class="p">(</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="shapes_from_gis-157"><a href="#shapes_from_gis-157"><span class="linenos">157</span></a>    <span class="k">if</span> <span class="n">shapes_gdf</span><span class="o">.</span><span class="n">crs</span><span class="o">.</span><span class="n">to_epsg</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">4326</span><span class="p">:</span>
+</span><span id="shapes_from_gis-158"><a href="#shapes_from_gis-158"><span class="linenos">158</span></a>      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid CRS: </span><span class="si">{</span><span class="n">shapes_gdf</span><span class="o">.</span><span class="n">crs</span><span class="si">}</span><span class="s2">. Expected EPSG:4326 (WGS84).&quot;</span><span class="p">)</span>
+</span><span id="shapes_from_gis-159"><a href="#shapes_from_gis-159"><span class="linenos">159</span></a>    <span class="c1"># Returns the GeoDataFrame</span>
+</span><span id="shapes_from_gis-160"><a href="#shapes_from_gis-160"><span class="linenos">160</span></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shapes correctly imported from GIS file&quot;</span><span class="p">)</span>
+</span><span id="shapes_from_gis-161"><a href="#shapes_from_gis-161"><span class="linenos">161</span></a>    <span class="k">return</span> <span class="n">shapes_gdf</span>
 </span></pre></div>
 
 
-            <div class="docstring"><p>Exports a <code>shapes</code> GeoDataFrame as a vector layer (gpkg, geojson or shp).</p>
+            <div class="docstring"><p>Reads a <code>shapes</code> GeoDataFrame from a GIS file.</p>
 
 <h2 id="parameters">Parameters</h2>
 
-<p>shapes_gdf : gpd.GeoDataFrame
-    The GeoDataFrame containing the shapes.
-output : str
-    The output file path and name.
-format : {"GeoPackage", "GeoJSON", "Shapefile"}, default "GeoPackage"
-    The output file format</p>
+<p>shapes : str
+    The GIS file containing the <code>stops</code>.</p>
+
+<h2 id="returns">Returns</h2>
+
+<p>shapes_gdf : geopandas.GeoDataFrame
+    A GeoDataFrame containing the the data, with the geometry as lines, in EPSG:4326.</p>
 
 <h2 id="raises">Raises</h2>
 
 <p>ValueError
-    If the input file is not correct (must be a GeoDataFrame, with no missing required colums, and a LineString geometry)
-OSError
-    If there was an error when writing the file</p>
+    If any of the following conditions is met :
+    - The required field (<code>shape_id</code>) is not present ;
+    - The geometry is empty ;
+    - The geometry is not a line ;
+    - The CRS is not EPSG:4326.</p>
+</div>
+
+
+                </section>
+                <section id="stops_from_gis">
+                            <input id="stops_from_gis-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">stops_from_gis</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">stops</span><span class="p">:</span> <span class="nb">str</span></span><span class="return-annotation">) -> <span class="n">geopandas</span><span class="o">.</span><span class="n">geodataframe</span><span class="o">.</span><span class="n">GeoDataFrame</span>:</span></span>
+
+                <label class="view-source-button" for="stops_from_gis-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#stops_from_gis"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="stops_from_gis-163"><a href="#stops_from_gis-163"><span class="linenos">163</span></a><span class="k">def</span><span class="w"> </span><span class="nf">stops_from_gis</span><span class="p">(</span><span class="n">stops</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span> <span class="p">:</span>
+</span><span id="stops_from_gis-164"><a href="#stops_from_gis-164"><span class="linenos">164</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="stops_from_gis-165"><a href="#stops_from_gis-165"><span class="linenos">165</span></a><span class="sd">    Reads a `stops` GeoDataFrame from a GIS file.</span>
+</span><span id="stops_from_gis-166"><a href="#stops_from_gis-166"><span class="linenos">166</span></a>
+</span><span id="stops_from_gis-167"><a href="#stops_from_gis-167"><span class="linenos">167</span></a><span class="sd">    Parameters</span>
+</span><span id="stops_from_gis-168"><a href="#stops_from_gis-168"><span class="linenos">168</span></a><span class="sd">    ----------</span>
+</span><span id="stops_from_gis-169"><a href="#stops_from_gis-169"><span class="linenos">169</span></a><span class="sd">    stops : str</span>
+</span><span id="stops_from_gis-170"><a href="#stops_from_gis-170"><span class="linenos">170</span></a><span class="sd">        The GIS file containing the `stops`.</span>
+</span><span id="stops_from_gis-171"><a href="#stops_from_gis-171"><span class="linenos">171</span></a>
+</span><span id="stops_from_gis-172"><a href="#stops_from_gis-172"><span class="linenos">172</span></a><span class="sd">    Returns</span>
+</span><span id="stops_from_gis-173"><a href="#stops_from_gis-173"><span class="linenos">173</span></a><span class="sd">    -------</span>
+</span><span id="stops_from_gis-174"><a href="#stops_from_gis-174"><span class="linenos">174</span></a><span class="sd">    stops_gdf : geopandas.GeoDataFrame</span>
+</span><span id="stops_from_gis-175"><a href="#stops_from_gis-175"><span class="linenos">175</span></a><span class="sd">        A GeoDataFrame containing the the data, with the geometry as points, in EPSG:4326.</span>
+</span><span id="stops_from_gis-176"><a href="#stops_from_gis-176"><span class="linenos">176</span></a>
+</span><span id="stops_from_gis-177"><a href="#stops_from_gis-177"><span class="linenos">177</span></a><span class="sd">    Raises</span>
+</span><span id="stops_from_gis-178"><a href="#stops_from_gis-178"><span class="linenos">178</span></a><span class="sd">    ------</span>
+</span><span id="stops_from_gis-179"><a href="#stops_from_gis-179"><span class="linenos">179</span></a><span class="sd">    ValueError</span>
+</span><span id="stops_from_gis-180"><a href="#stops_from_gis-180"><span class="linenos">180</span></a><span class="sd">        If any of the following conditions is met :</span>
+</span><span id="stops_from_gis-181"><a href="#stops_from_gis-181"><span class="linenos">181</span></a><span class="sd">        - The required fields (`stops_id` and `stop_name`) are not present ;</span>
+</span><span id="stops_from_gis-182"><a href="#stops_from_gis-182"><span class="linenos">182</span></a><span class="sd">        - The geometry is empty ;</span>
+</span><span id="stops_from_gis-183"><a href="#stops_from_gis-183"><span class="linenos">183</span></a><span class="sd">        - The geometry is not a point ;</span>
+</span><span id="stops_from_gis-184"><a href="#stops_from_gis-184"><span class="linenos">184</span></a><span class="sd">        - The CRS is not EPSG:4326.</span>
+</span><span id="stops_from_gis-185"><a href="#stops_from_gis-185"><span class="linenos">185</span></a>
+</span><span id="stops_from_gis-186"><a href="#stops_from_gis-186"><span class="linenos">186</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="stops_from_gis-187"><a href="#stops_from_gis-187"><span class="linenos">187</span></a>    <span class="c1"># Loads the stops from a GIS file</span>
+</span><span id="stops_from_gis-188"><a href="#stops_from_gis-188"><span class="linenos">188</span></a>    <span class="n">stops_gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">stops</span><span class="p">)</span>
+</span><span id="stops_from_gis-189"><a href="#stops_from_gis-189"><span class="linenos">189</span></a>    <span class="c1"># Checks for the required fields</span>
+</span><span id="stops_from_gis-190"><a href="#stops_from_gis-190"><span class="linenos">190</span></a>    <span class="n">required_fields</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;stop_id&quot;</span><span class="p">,</span> <span class="s2">&quot;stop_name&quot;</span><span class="p">}</span>
+</span><span id="stops_from_gis-191"><a href="#stops_from_gis-191"><span class="linenos">191</span></a>    <span class="n">missing</span> <span class="o">=</span> <span class="n">required_fields</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">stops_gdf</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</span><span id="stops_from_gis-192"><a href="#stops_from_gis-192"><span class="linenos">192</span></a>    <span class="k">if</span> <span class="n">missing</span><span class="p">:</span>
+</span><span id="stops_from_gis-193"><a href="#stops_from_gis-193"><span class="linenos">193</span></a>      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing required stop fields: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="stops_from_gis-194"><a href="#stops_from_gis-194"><span class="linenos">194</span></a>    <span class="c1"># Checks the geometry</span>
+</span><span id="stops_from_gis-195"><a href="#stops_from_gis-195"><span class="linenos">195</span></a>    <span class="k">if</span> <span class="n">stops_gdf</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">is_empty</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+</span><span id="stops_from_gis-196"><a href="#stops_from_gis-196"><span class="linenos">196</span></a>      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Stop geometries contain empty features.&quot;</span><span class="p">)</span>
+</span><span id="stops_from_gis-197"><a href="#stops_from_gis-197"><span class="linenos">197</span></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">stops_gdf</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geom_type</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s2">&quot;Point&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+</span><span id="stops_from_gis-198"><a href="#stops_from_gis-198"><span class="linenos">198</span></a>      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Stop geometries must all be of type &#39;Point&#39;.&quot;</span><span class="p">)</span>
+</span><span id="stops_from_gis-199"><a href="#stops_from_gis-199"><span class="linenos">199</span></a>    <span class="c1"># Checks the CRS (if there is one, and if it is EPSG:4326)</span>
+</span><span id="stops_from_gis-200"><a href="#stops_from_gis-200"><span class="linenos">200</span></a>    <span class="k">if</span> <span class="n">stops_gdf</span><span class="o">.</span><span class="n">crs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="stops_from_gis-201"><a href="#stops_from_gis-201"><span class="linenos">201</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: No CRS defined. Assuming EPSG:4326 (WGS84).&quot;</span><span class="p">)</span>
+</span><span id="stops_from_gis-202"><a href="#stops_from_gis-202"><span class="linenos">202</span></a>        <span class="n">stops_gdf</span><span class="o">.</span><span class="n">set_crs</span><span class="p">(</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="stops_from_gis-203"><a href="#stops_from_gis-203"><span class="linenos">203</span></a>    <span class="k">if</span> <span class="n">stops_gdf</span><span class="o">.</span><span class="n">crs</span><span class="o">.</span><span class="n">to_epsg</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">4326</span><span class="p">:</span>
+</span><span id="stops_from_gis-204"><a href="#stops_from_gis-204"><span class="linenos">204</span></a>      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid CRS: </span><span class="si">{</span><span class="n">stops_gdf</span><span class="o">.</span><span class="n">crs</span><span class="si">}</span><span class="s2">. Expected EPSG:4326 (WGS84).&quot;</span><span class="p">)</span>
+</span><span id="stops_from_gis-205"><a href="#stops_from_gis-205"><span class="linenos">205</span></a>    <span class="c1"># Returns the GeoDataFrame</span>
+</span><span id="stops_from_gis-206"><a href="#stops_from_gis-206"><span class="linenos">206</span></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stops correctly imported from GIS file&quot;</span><span class="p">)</span>
+</span><span id="stops_from_gis-207"><a href="#stops_from_gis-207"><span class="linenos">207</span></a>    <span class="k">return</span> <span class="n">stops_gdf</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Reads a <code>stops</code> GeoDataFrame from a GIS file.</p>
+
+<h2 id="parameters">Parameters</h2>
+
+<p>stops : str
+    The GIS file containing the <code>stops</code>.</p>
+
+<h2 id="returns">Returns</h2>
+
+<p>stops_gdf : geopandas.GeoDataFrame
+    A GeoDataFrame containing the the data, with the geometry as points, in EPSG:4326.</p>
+
+<h2 id="raises">Raises</h2>
+
+<p>ValueError
+    If any of the following conditions is met :
+    - The required fields (<code>stops_id</code> and <code>stop_name</code>) are not present ;
+    - The geometry is empty ;
+    - The geometry is not a point ;
+    - The CRS is not EPSG:4326.</p>
 </div>
 
 
