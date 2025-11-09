@@ -130,10 +130,11 @@ def shapes_from_gis(shapes:str)->gpd.GeoDataFrame :
     ------
     ValueError
         If any of the following conditions is met :
-            - The required field (`shape_id`) is not present.
-            - The geometry is empty.
-            - The geometry is not a line.
-            - The CRS is not EPSG:4326.
+
+        - The required field (`shape_id`) is not present.
+        - The geometry is empty.
+        - The geometry is not a line.
+        - The CRS is not EPSG:4326.
 
     """
     # Loads the shapes from a GIS file
@@ -177,10 +178,11 @@ def stops_from_gis(stops:str)->gpd.GeoDataFrame :
     ------
     ValueError
         If any of the following conditions is met :
-            - The required fields (`stops_id` and `stop_name`) are not present.
-            - The geometry is empty.
-            - The geometry is not a point.
-            - The CRS is not EPSG:4326.
+
+        - The required fields (`stops_id` and `stop_name`) are not present.
+        - The geometry is empty.
+        - The geometry is not a point.
+        - The CRS is not EPSG:4326.
 
     """
     # Loads the stops from a GIS file
