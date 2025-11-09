@@ -36,6 +36,14 @@
 
 ---
 
+## Planned roadmap
+
+- v0.2.0 (coming december 2025) :
+    - `new` module to create an empty GTFS feed ;
+    - `edit` module to modify an existing feed.
+- v0.3.0 (coming early 2026) :
+    - `spatial` module to perform spatial operations on the feed, including routing.
+
 ## Installation
 
 From PyPI
