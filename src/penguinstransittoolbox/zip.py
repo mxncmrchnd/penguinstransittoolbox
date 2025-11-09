@@ -336,13 +336,13 @@ def load_feed(path: str) -> Dict[str, Union[pd.DataFrame, gpd.GeoDataFrame]]:
 
     Raises
     ------
-    requests.exceptions.RequestException
+    - requests.exceptions.RequestException
         If downloading a remote GTFS feed fails.
     
-    zipfile.BadZipFile
+    - zipfile.BadZipFile
         If the provided file is not a valid ZIP archive.
     
-    ValueError
+    - ValueError
         If a loader encounters invalid or corrupted data.
     """
     # Gets the list of functions
