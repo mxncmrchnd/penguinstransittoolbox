@@ -1,17 +1,8 @@
-import io
-import requests
-import zipfile
-import pandas as pd
-import geopandas as gpd
-import warnings
-from shapely.geometry import Point, LineString
-from shapely.geometry.base import BaseGeometry
-from typing import Dict, Union, Callable
-
 """
-GTFS Loaders from ZIP files
----------------------------
-Functions to load GTFS data from ZIP archives (local or remote).
+`zip` module
+============
+
+A module to read GTFS data from a ZIP file.
 
 Notes
 -----
@@ -24,6 +15,16 @@ All GTFS loader functions in this package may raise the following exceptions:
 
 These exceptions originate from internal helper functions shared by all loaders.
 """
+
+import io
+import requests
+import zipfile
+import pandas as pd
+import geopandas as gpd
+import warnings
+from shapely.geometry import Point, LineString
+from shapely.geometry.base import BaseGeometry
+from typing import Dict, Union, Callable
 
 def _open_file(path: str, filename: str) -> pd.DataFrame:
     """

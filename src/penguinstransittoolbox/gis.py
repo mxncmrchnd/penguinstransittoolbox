@@ -1,11 +1,12 @@
+"""
+`gis`module
+===========
+
+A module to work with `stops`and `shapes` as GIS files.
+"""
+
 import geopandas as gpd
 from typing import Literal
-
-"""
-Stops and Shapes exporter from GeoDataFrames
---------------------------------------------
-Functions to export stops and shapes as GIS-ready files.
-"""
 
 def _validate_stops(stops_gdf: gpd.GeoDataFrame) -> None:
     """

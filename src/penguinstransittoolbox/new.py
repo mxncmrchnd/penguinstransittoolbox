@@ -1,5 +1,6 @@
 """
-Empty GTFS feed builder
------------------------
-Functions to create an empty GTFS feed.
+`new` module
+============
+
+A module to create an empty feed.
 """

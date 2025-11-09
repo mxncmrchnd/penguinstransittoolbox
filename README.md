@@ -15,6 +15,7 @@
 ## Summary
 
 - [Features](#features)
+- [Planned roadmap](#planned-roadmap)
 - [Installation](#installation)
 - [Usage examples](#usage-examples)
 - [Documentation](#documentation)
