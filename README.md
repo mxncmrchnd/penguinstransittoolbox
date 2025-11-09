@@ -67,6 +67,12 @@ ptt.gis.export_stops(feed['stops'], output='stops.gpkg')
 ptt.gis.export_shapes(feed['shapes'], output='shapes.shp', format='Shapefile')
 ```
 
+Reading stops and shapes from GIS files :
+```python
+stops_gdf = ptt.gis.stops_from_gis('stops.gpkg')
+shapes_gdf = ptt.gis.shapes_from_gis('shapes.shp')
+```
+
 ## Documentation
 
 The documentation is available [here](https://mxncmrchnd.github.io/penguinstransittoolbox/penguinstransittoolbox.html).

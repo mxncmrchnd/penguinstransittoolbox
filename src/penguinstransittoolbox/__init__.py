@@ -6,19 +6,19 @@ A python package to manage GTFS feeds.
 
 Modules
 -------
+gis :
+    A module to work with `stops`and `shapes` as GIS files.
+
 zip : 
     A module to read GTFS data from a ZIP file.
-
-gis :
-    A module to export stops and shapes as GIS-ready files.
 
 """
 
 from importlib import import_module
 
 __all__ = [
-    "zip",
-    "gis"
+    "gis",
+    "zip"
 ]
 
 def __getattr__(name):

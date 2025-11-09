@@ -72,7 +72,7 @@ def read_agency(path: str) -> pd.DataFrame:
     
     Returns
     -------
-        A GeoDataFrame containing the the data.
+        A GeoDataFrame containing the the agency data.
     """
     return _open_file(path, "agency.txt")
 
@@ -87,7 +87,7 @@ def read_calendar(path: str) -> pd.DataFrame:
     
     Returns
     -------
-        A GeoDataFrame containing the the data.
+        A GeoDataFrame containing the the calendar data.
     """
     return _open_file(path, "calendar.txt")
 
@@ -102,7 +102,7 @@ def read_calendar_dates(path: str) -> pd.DataFrame:
     
     Returns
     -------
-        A GeoDataFrame containing the the data.
+        A GeoDataFrame containing the the calendar dates data.
     """
     return _open_file(path, "calendar_dates.txt")
 
@@ -117,7 +117,7 @@ def read_fare_attributes(path: str) -> pd.DataFrame:
     
     Returns
     -------
-        A GeoDataFrame containing the the data.
+        A GeoDataFrame containing the the fare attributes data.
     """
     return _open_file(path, "fare_attributes.txt")
 
@@ -132,7 +132,7 @@ def read_fare_rules(path: str) -> pd.DataFrame:
     
     Returns
     -------
-        A GeoDataFrame containing the the data.
+        A GeoDataFrame containing the the fare rules data.
     """
     return _open_file(path, "fare_rules.txt")
 
@@ -147,7 +147,7 @@ def read_feed_info(path: str) -> pd.DataFrame:
     
     Returns
     -------
-        A GeoDataFrame containing the the data.
+        A GeoDataFrame containing the the feed info data.
     """
     return _open_file(path, "feed_info.txt")
 
@@ -162,7 +162,7 @@ def read_frequencies(path: str) -> pd.DataFrame:
     
     Returns
     -------
-        A GeoDataFrame containing the the data.
+        A GeoDataFrame containing the the frequencies data.
     """
     return _open_file(path, "frequencies.txt")
 
@@ -177,7 +177,7 @@ def read_routes(path: str) -> pd.DataFrame:
     
     Returns
     -------
-        A GeoDataFrame containing the the data.
+        A GeoDataFrame containing the the routes data.
     """
     return _open_file(path, "routes.txt")
 
@@ -193,7 +193,7 @@ def read_shapes(path: str) -> gpd.GeoDataFrame:
     Returns
     -------
     shapes_gdf : GeoDataFrame
-        A GeoDataFrame containing the the data, with the geometry as a linestring, in EPSG:4326.
+        A GeoDataFrame containing the the data, with the geometry as linestrings, in EPSG:4326.
     
     Raises
     ------
@@ -228,8 +228,8 @@ def read_stops(path: str) -> gpd.GeoDataFrame:
     
     Returns
     -------
-    stops_gdf : GeoDataFrame
-        A GeoDataFrame containing the the data, with the geometry as a point, in EPSG:4326.
+    stops_gdf : geopandas.GeoDataFrame
+        A GeoDataFrame containing the the data, with the geometry as points, in EPSG:4326.
     
     Raises
     ------
@@ -258,7 +258,7 @@ def read_stop_times(path: str) -> pd.DataFrame:
     
     Returns
     -------
-        A GeoDataFrame containing the the data.
+        A GeoDataFrame containing the the stop times data.
     """
     return _open_file(path, "stop_times.txt")
 
@@ -273,7 +273,7 @@ def read_transfers(path: str) -> pd.DataFrame:
     
     Returns
     -------
-        A GeoDataFrame containing the the data.
+        A GeoDataFrame containing the the transfers data.
     """
     return _open_file(path, "transfers.txt")
 
@@ -288,7 +288,7 @@ def read_trips(path: str) -> pd.DataFrame:
     
     Returns
     -------
-        A GeoDataFrame containing the the data.
+        A GeoDataFrame containing the the trips data.
     """
     return _open_file(path, "trips.txt")
 
