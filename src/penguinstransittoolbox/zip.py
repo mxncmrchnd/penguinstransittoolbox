@@ -50,7 +50,6 @@ def _apply_schema(df: pd.DataFrame, empty_df: pd.DataFrame) -> pd.DataFrame:
         return empty_df.copy()
     return df.reindex(columns=empty_df.columns, fill_value=None)
 
-
 def _open_file(path: str, filename: str) -> pd.DataFrame:
     """
     Private function to open files from the feed.
@@ -129,6 +128,11 @@ def read_calendar(path: str) -> pd.DataFrame:
     Returns
     -------
         A GeoDataFrame containing the the calendar data.
+
+    Raises
+    ------
+        ValueError
+            In strict mode, if the file is missing a column.
     """
     return _open_file(path, "calendar.txt")
 
