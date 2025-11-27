@@ -23,7 +23,33 @@ import geopandas as gpd
 import warnings
 from shapely.geometry import Point, LineString
 from shapely.geometry.base import BaseGeometry
-from typing import Dict, Union, Callable
+from typing import Dict, Union, Callable, Final
+
+AGENCY_REQUIRED: Final[set[str]] = {
+    "agency_name",
+    "agency_url",
+    "agency_timezone",
+}
+
+AGENCY_SCHEMA: Final[dict[str, type]] = {
+    "agency_id": object,
+    "agency_name": object,
+    "agency_url": object,
+    "agency_timezone": object,
+    "agency_lang": object,
+    "agency_phone": object,
+    "agency_fare_url": object,
+    "agency_email": object,
+}
+
+def _apply_schema(df: pd.DataFrame, empty_df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Private function to reindex columns
+    """
+    if df.empty:
+        return empty_df.copy()
+    return df.reindex(columns=empty_df.columns, fill_value=None)
+
 
 def _open_file(path: str, filename: str) -> pd.DataFrame:
     """
@@ -61,20 +87,35 @@ def _validate_geometries(gdf: gpd.GeoDataFrame, name: str) -> None:
     if invalid_geom.any():
         warnings.warn(f"[{name}] has {invalid_geom.sum()} invalid geometries (self-intersecting or corrupted).")
 
-def read_agency(path: str) -> pd.DataFrame:
+def read_agency(path: str, strict:bool = True) -> pd.DataFrame:
     """
     Loads the `agency.txt` from a GTFS ZIP file (local or remote) into a DataFrame.
 
     Parameters
     ----------
     path : str
-        The path to the source ZIP file. Can be a local path or an URL.
+        The path to the source ZIP file. Can be a local path or an URL ;
+    strict : bool
+        If the loader enforces strict schema verification or not. Deafult : `True`
     
     Returns
     -------
-        A GeoDataFrame containing the the agency data.
+        agency_df : pd.DataFrame
+            A DataFrame containing the agency data.
     """
-    return _open_file(path, "agency.txt")
+    agency_df = _open_file(path, "agency.txt")
+    # strict mode
+    missing = AGENCY_REQUIRED - set(agency_df.columns)
+    if strict and missing:
+        raise ValueError(f"agency.txt missing required columns: {missing}")
+    # non-strict mode
+    if not strict:
+        for col in AGENCY_SCHEMA:
+            if col not in agency_df.columns:
+                agency_df[col] = pd.Series(dtype=AGENCY_SCHEMA[col])
+    df = df.astype({k: v for k, v in AGENCY_SCHEMA.items() if k in df.columns},
+                   errors="ignore")
+    return df
 
 def read_calendar(path: str) -> pd.DataFrame:
     """
