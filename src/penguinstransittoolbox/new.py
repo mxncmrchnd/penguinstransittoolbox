@@ -46,7 +46,7 @@ def calendar() -> pd.DataFrame:
     An empty DataFrame containing the following columns :
 
         - `service_id` : the service ID ;
-        - `monday` : indicates if the service operates on mondays (`monday` = 1) or not (`monday` = 1) ;
+        - `monday` : indicates if the service operates on mondays (`monday` = 1) or not (`monday` = 0) ;
         - `tuesday` : same as above, but for tuesdays ;
         - `wednesday` : same as above, but for wednesdays ;
         - `thursday` : same as above, but for thursdays ;
@@ -63,4 +63,24 @@ def calendar() -> pd.DataFrame:
     return pd.DataFrame({
         col: pd.Series(dtype=dtype)
         for col, dtype in schemas.CALENDAR_SCHEMA.items()
+    })
+
+def calendar_dates() -> pd.DataFrame:
+    """
+    Creates and empty `calendar_dates` DataFrame.
+    
+    Returns
+    -------
+    An empty DataFrame containing the following columns :
+        - `service_id` : the service ID ;
+        - `date` : the date when a service exception occurs, in YYYYMMDD format.
+        - `exception_type` : whether service is added (`exception_type` = 1) or removed (`exception_type` = 2).
+
+    See Also
+    --------
+    penguinstransittoolbox.schemas.CALENDAR_DATES_SCHEMA
+    """
+    return pd.DataFrame({
+        col: pd.Series(dtype=dtype)
+        for col, dtype in schemas.CALENDAR_DATES_SCHEMA.items()
     })

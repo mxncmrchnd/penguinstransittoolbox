@@ -33,5 +33,14 @@ CALENDAR_SCHEMA : Dict[str, str]={
      "end_date" : "int64"
 }
 """
-Schema for the `calendar` file. `service_id` is of `object` dtype. Weekdays or of `int8` dtype, to allow `NA` values in incomplete feeds. Start and end dates are of `int64` dtype, as dates are stored as YYYYMMDD format.
+Schema for the `calendar` file. `service_id` is of `object` dtype. Weekdays are of `int8` dtype, to allow `NA` values in incomplete feeds. Start and end dates are of `int64` dtype, as dates are stored as YYYYMMDD format.
+"""
+
+CALENDAR_DATES_SCHEMA : Dict[str, str]={
+    "service_id" : "object",
+    "date" : "int64",
+    "exception_type" : "int8"
+}
+"""
+Schema for the `calendar_dates` file. `service_id` is of `object` dtype, `date` is of `int64` dtype, as dates are stored as YYYYMMDD, `exception_type` is of `int8` dtype, to allow `NA` values in incomplete feeds.
 """
