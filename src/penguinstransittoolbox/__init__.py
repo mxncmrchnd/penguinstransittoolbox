@@ -15,6 +15,9 @@ gis :
 new :
     A module to create an empty feed.
 
+schemas : 
+    GTFS table schemas definitions.
+
 zip : 
     A module to read GTFS data from a ZIP file.
 
@@ -26,6 +29,7 @@ __all__ = [
     "edit",
     "gis",
     "new",
+    "schemas",
     "zip"
 ]
 

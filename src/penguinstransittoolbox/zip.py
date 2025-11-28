@@ -25,31 +25,6 @@ from shapely.geometry import Point, LineString
 from shapely.geometry.base import BaseGeometry
 from typing import Dict, Union, Callable, Final
 
-AGENCY_REQUIRED: Final[set[str]] = {
-    "agency_name",
-    "agency_url",
-    "agency_timezone",
-}
-
-AGENCY_SCHEMA: Final[dict[str, type]] = {
-    "agency_id": object,
-    "agency_name": object,
-    "agency_url": object,
-    "agency_timezone": object,
-    "agency_lang": object,
-    "agency_phone": object,
-    "agency_fare_url": object,
-    "agency_email": object,
-}
-
-def _apply_schema(df: pd.DataFrame, empty_df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Private function to reindex columns
-    """
-    if df.empty:
-        return empty_df.copy()
-    return df.reindex(columns=empty_df.columns, fill_value=None)
-
 def _open_file(path: str, filename: str) -> pd.DataFrame:
     """
     Private function to open files from the feed.
@@ -94,27 +69,12 @@ def read_agency(path: str, strict:bool = True) -> pd.DataFrame:
     ----------
     path : str
         The path to the source ZIP file. Can be a local path or an URL ;
-    strict : bool
-        If the loader enforces strict schema verification or not. Deafult : `True`
     
     Returns
     -------
-        agency_df : pd.DataFrame
-            A DataFrame containing the agency data.
+        A DataFrame containing the agency data.
     """
-    agency_df = _open_file(path, "agency.txt")
-    # strict mode
-    missing = AGENCY_REQUIRED - set(agency_df.columns)
-    if strict and missing:
-        raise ValueError(f"agency.txt missing required columns: {missing}")
-    # non-strict mode
-    if not strict:
-        for col in AGENCY_SCHEMA:
-            if col not in agency_df.columns:
-                agency_df[col] = pd.Series(dtype=AGENCY_SCHEMA[col])
-    df = df.astype({k: v for k, v in AGENCY_SCHEMA.items() if k in df.columns},
-                   errors="ignore")
-    return df
+    return _open_file(path, "agency.txt")
 
 def read_calendar(path: str) -> pd.DataFrame:
     """
@@ -127,12 +87,7 @@ def read_calendar(path: str) -> pd.DataFrame:
     
     Returns
     -------
-        A GeoDataFrame containing the the calendar data.
-
-    Raises
-    ------
-        ValueError
-            In strict mode, if the file is missing a column.
+        A DataFrame containing the the calendar data.
     """
     return _open_file(path, "calendar.txt")
 
@@ -147,7 +102,7 @@ def read_calendar_dates(path: str) -> pd.DataFrame:
     
     Returns
     -------
-        A GeoDataFrame containing the the calendar dates data.
+        A DataFrame containing the the calendar dates data.
     """
     return _open_file(path, "calendar_dates.txt")
 
@@ -162,7 +117,7 @@ def read_fare_attributes(path: str) -> pd.DataFrame:
     
     Returns
     -------
-        A GeoDataFrame containing the the fare attributes data.
+        A DataFrame containing the the fare attributes data.
     """
     return _open_file(path, "fare_attributes.txt")
 
@@ -177,7 +132,7 @@ def read_fare_rules(path: str) -> pd.DataFrame:
     
     Returns
     -------
-        A GeoDataFrame containing the the fare rules data.
+        A DataFrame containing the the fare rules data.
     """
     return _open_file(path, "fare_rules.txt")
 
@@ -192,7 +147,7 @@ def read_feed_info(path: str) -> pd.DataFrame:
     
     Returns
     -------
-        A GeoDataFrame containing the the feed info data.
+        A DataFrame containing the the feed info data.
     """
     return _open_file(path, "feed_info.txt")
 
@@ -207,7 +162,7 @@ def read_frequencies(path: str) -> pd.DataFrame:
     
     Returns
     -------
-        A GeoDataFrame containing the the frequencies data.
+        A DataFrame containing the the frequencies data.
     """
     return _open_file(path, "frequencies.txt")
 
@@ -222,7 +177,7 @@ def read_routes(path: str) -> pd.DataFrame:
     
     Returns
     -------
-        A GeoDataFrame containing the the routes data.
+        A DataFrame containing the the routes data.
     """
     return _open_file(path, "routes.txt")
 
@@ -303,7 +258,7 @@ def read_stop_times(path: str) -> pd.DataFrame:
     
     Returns
     -------
-        A GeoDataFrame containing the the stop times data.
+        A DataFrame containing the the stop times data.
     """
     return _open_file(path, "stop_times.txt")
 
@@ -318,7 +273,7 @@ def read_transfers(path: str) -> pd.DataFrame:
     
     Returns
     -------
-        A GeoDataFrame containing the the transfers data.
+        A DataFrame containing the the transfers data.
     """
     return _open_file(path, "transfers.txt")
 
@@ -333,7 +288,7 @@ def read_trips(path: str) -> pd.DataFrame:
     
     Returns
     -------
-        A GeoDataFrame containing the the trips data.
+        A DataFrame containing the the trips data.
     """
     return _open_file(path, "trips.txt")
 
