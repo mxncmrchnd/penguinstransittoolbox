@@ -29,6 +29,7 @@
 ## Features
 
 - Loading of GTFS files, either individually or in a dictionnary ;
+- Compatibility with the GTFS Fares-v2 extension proposal ;
 - Support of both standard and spatial tables ;
 - Export of `stops` and `shapes` as GIS-ready files ;
 - Detection of available files ;

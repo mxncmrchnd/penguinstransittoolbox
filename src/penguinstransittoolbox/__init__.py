@@ -3,6 +3,7 @@ Penguin's Transit Toolbox
 =========================
 
 A python package to manage GTFS feeds.
+Compatible with the GTFS Fares-v2 extension proposal.
 
 Modules
 -------

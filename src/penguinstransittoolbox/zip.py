@@ -61,7 +61,7 @@ def _validate_geometries(gdf: gpd.GeoDataFrame, name: str) -> None:
     if invalid_geom.any():
         warnings.warn(f"[{name}] has {invalid_geom.sum()} invalid geometries (self-intersecting or corrupted).")
 
-def read_agency(path: str, strict:bool = True) -> pd.DataFrame:
+def read_agency(path: str) -> pd.DataFrame:
     """
     Loads the `agency.txt` from a GTFS ZIP file (local or remote) into a DataFrame.
 
@@ -75,6 +75,51 @@ def read_agency(path: str, strict:bool = True) -> pd.DataFrame:
         A DataFrame containing the agency data.
     """
     return _open_file(path, "agency.txt")
+
+def read_area(path: str) -> pd.DataFrame:
+    """
+    Loads the `area.txt` from a GTFS ZIP file (local or remote) into a DataFrame.
+
+    Parameters
+    ----------
+    path : str
+        The path to the source ZIP file. Can be a local path or an URL ;
+    
+    Returns
+    -------
+        A DataFrame containing the area data.
+    """
+    return _open_file(path, "area.txt")
+
+def read_attributions(path: str) -> pd.DataFrame:
+    """
+    Loads the `attributions.txt` from a GTFS ZIP file (local or remote) into a DataFrame.
+
+    Parameters
+    ----------
+    path : str
+        The path to the source ZIP file. Can be a local path or an URL ;
+    
+    Returns
+    -------
+        A DataFrame containing the attributions data.
+    """
+    return _open_file(path, "attributions.txt")
+
+def read_booking_rules(path: str) -> pd.DataFrame:
+    """
+    Loads the `booking_rules.txt` from a GTFS ZIP file (local or remote) into a DataFrame.
+
+    Parameters
+    ----------
+    path : str
+        The path to the source ZIP file. Can be a local path or an URL ;
+    
+    Returns
+    -------
+        A DataFrame containing the booking rules data.
+    """
+    return _open_file(path, "booking rules.txt")
 
 def read_calendar(path: str) -> pd.DataFrame:
     """
@@ -121,6 +166,66 @@ def read_fare_attributes(path: str) -> pd.DataFrame:
     """
     return _open_file(path, "fare_attributes.txt")
 
+def read_fare_leg_rules(path: str) -> pd.DataFrame:
+    """
+    Loads the `fare_leg_rules.txt` from a GTFS ZIP file (local or remote) into a DataFrame.
+
+    Parameters
+    ----------
+    path : str
+        The path to the source ZIP file. Can be a local path or an URL ;
+    
+    Returns
+    -------
+        A DataFrame containing the fare leg rules data.
+    """
+    return _open_file(path, "fare_leg_rules.txt")
+
+def read_fare_leg_join_rules(path: str) -> pd.DataFrame:
+    """
+    Loads the `fare_leg_join_rules.txt` from a GTFS ZIP file (local or remote) into a DataFrame.
+
+    Parameters
+    ----------
+    path : str
+        The path to the source ZIP file. Can be a local path or an URL ;
+    
+    Returns
+    -------
+        A DataFrame containing the fare leg join rules data.
+    """
+    return _open_file(path, "fare_leg_join_rules.txt")
+
+def read_fare_media(path: str) -> pd.DataFrame:
+    """
+    Loads the `fare_media.txt` from a GTFS ZIP file (local or remote) into a DataFrame.
+
+    Parameters
+    ----------
+    path : str
+        The path to the source ZIP file. Can be a local path or an URL ;
+    
+    Returns
+    -------
+        A DataFrame containing the fare media data.
+    """
+    return _open_file(path,"fare_media.txt")
+
+def read_fare_products(path: str) -> pd.DataFrame :
+    """
+    Loads the `fare_products.txt` from a GTFS ZIP file (local or remote) into a DataFrame.
+
+    Parameters
+    ----------
+    path : str
+        The path to the source ZIP file. Can be a local path or an URL ;
+    
+    Returns
+    -------
+        A DataFrame containing the fare products data.
+    """
+    return _open_file(path, "fare_products.txt")
+
 def read_fare_rules(path: str) -> pd.DataFrame:
     """
     Loads the `fare_rules.txt` from a GTFS ZIP file (local or remote) into a DataFrame.
@@ -135,6 +240,21 @@ def read_fare_rules(path: str) -> pd.DataFrame:
         A DataFrame containing the the fare rules data.
     """
     return _open_file(path, "fare_rules.txt")
+
+def read_fare_transfer_rules(path:str) -> pd.DataFrame:
+    """
+    Loads the `fare_transfer_rules.txt` from a GTFS ZIP file (local or remote) into a DataFrame.
+
+    Parameters
+    ----------
+    path : str
+        The path to the source ZIP file. Can be a local path or an URL ;
+    
+    Returns
+    -------
+        A DataFrame containing the fare transfer rules data.
+    """
+    return _open_file(path, "fare_transfer_fules.txt")
 
 def read_feed_info(path: str) -> pd.DataFrame:
     """
@@ -165,6 +285,152 @@ def read_frequencies(path: str) -> pd.DataFrame:
         A DataFrame containing the the frequencies data.
     """
     return _open_file(path, "frequencies.txt")
+
+def read_levels(path: str) -> pd.DataFrame:
+    """
+    Loads the `levels.txt` from a GTFS ZIP file (local or remote) into a DataFrame.
+
+    Parameters
+    ----------
+    path : str
+        The path to the source ZIP file. Can be a local path or an URL ;
+    
+    Returns
+    -------
+        A DataFrame containing the levels data.
+    """
+    return _open_file(path, "levels.txt")
+
+def read_location_stop_groups(path: str) -> pd.DataFrame:
+    """
+    Loads the `location_stop_groups.txt` from a GTFS ZIP file (local or remote) into a DataFrame.
+
+    Parameters
+    ----------
+    path : str
+        The path to the source ZIP file. Can be a local path or an URL ;
+    
+    Returns
+    -------
+        A DataFrame containing the location stop groups data.
+    """
+    return _open_file(path, "location_stop_groups.txt")
+
+def read_location_groups(path: str) -> pd.DataFrame:
+    """
+    Loads the `location_groups.txt` from a GTFS ZIP file (local or remote) into a DataFrame.
+
+    Parameters
+    ----------
+    path : str
+        The path to the source ZIP file. Can be a local path or an URL ;
+    
+    Returns
+    -------
+        A DataFrame containing the location groups data.
+    """
+    return _open_file(path, "location_groups.txt")
+
+def read_locations(path: str) -> gpd.GeoDataFrame:
+    """
+    Loads the `locations.geojson` from a GTFS ZIP file (local or remote) into a GeoDataFrame.
+
+    Parameters
+    ----------
+    path : str
+        The path to the source ZIP file. Can be a local path or an URL ;
+    
+    Returns
+    -------
+        A GeoDataFrame containing the locations data.
+    
+    Raises
+    ------
+    FileNotFoundError
+        If the file is not found in the archive.
+    ValueError
+        If the geometry is not a Polygon or MultiPolygon.
+    """
+    expected_geom_types={"Polygon", "MultiPolygon"}
+    if path.startswith(("http://", "https://")):
+        response = requests.get(path)
+        response.raise_for_status()
+        zip_bytes = io.BytesIO(response.content)
+    else:
+        zip_bytes = open(path, "rb")
+    with zipfile.ZipFile(zip_bytes, "r") as z:
+        if "locations.geojson" not in z.namelist():
+            raise FileNotFoundError(f"{"locations.geojson"} not found inside the GTFS archive.")       
+        with z.open("locations.geojson") as f:
+            gdf = gpd.read_file(f)
+    if gdf.crs is None:
+        gdf = gdf.set_crs("EPSG:4326")
+    if isinstance(expected_geom_types, str):
+        expected_geom_types = {expected_geom_types}
+    actual_types = {geom.geom_type for geom in gdf.geometry if geom is not None}
+    if not actual_types.issubset(expected_geom_types):
+        raise ValueError(f"Geometry type mismatch: "f"expected {expected_geom_types}, found {actual_types}")
+    return gdf
+
+def read_networks(path: str) -> pd.DataFrame:
+    """
+    Loads the `networks.txt` from a GTFS ZIP file (local or remote) into a DataFrame.
+
+    Parameters
+    ----------
+    path : str
+        The path to the source ZIP file. Can be a local path or an URL ;
+    
+    Returns
+    -------
+        A DataFrame containing the networks data.
+    """
+    return _open_file(path, "networks.txt")
+
+def read_pathways(path: str) -> pd.DataFrame:
+    """
+    Loads the `pathways.txt` from a GTFS ZIP file (local or remote) into a DataFrame.
+
+    Parameters
+    ----------
+    path : str
+        The path to the source ZIP file. Can be a local path or an URL ;
+    
+    Returns
+    -------
+        A DataFrame containing the pathways data.
+    """
+    return _open_file(path, "pathways.txt")
+
+def read_rider_categories(path: str) -> pd.DataFrame:
+    """
+    Loads the `rider_categories.txt` from a GTFS ZIP file (local or remote) into a DataFrame.
+
+    Parameters
+    ----------
+    path : str
+        The path to the source ZIP file. Can be a local path or an URL ;
+    
+    Returns
+    -------
+        A DataFrame containing the rider categories data.
+    """
+    return _open_file(path, "rider_categories.txt")
+
+def read_route_networks(path: str) -> pd.DataFrame:
+    """
+    Loads the `route_networks.txt` from a GTFS ZIP file (local or remote) into a DataFrame.
+
+    Parameters
+    ----------
+    path : str
+        The path to the source ZIP file. Can be a local path or an URL ;
+    
+    Returns
+    -------
+        A DataFrame containing the agency data.
+    """
+    return _open_file(path, "route_networks.txt")
 
 def read_routes(path: str) -> pd.DataFrame:
     """
@@ -247,6 +513,21 @@ def read_stops(path: str) -> gpd.GeoDataFrame:
     stops_gdf = gpd.GeoDataFrame(stops_df, geometry = geometry, crs="EPSG:4326")
     return stops_gdf
 
+def read_stop_areas(path:str) -> pd.DataFrame:
+    """
+    Loads the `stop_areas.txt` from a GTFS ZIP file (local or remote) into a DataFrame.
+
+    Parameters
+    ----------
+    path : str
+        The path to the source ZIP file. Can be a local path or an URL ;
+    
+    Returns
+    -------
+        A DataFrame containing the stop areas data.
+    """
+    return _open_file(path, "stop_areas.txt")
+
 def read_stop_times(path: str) -> pd.DataFrame:
     """
     Loads the `stop_times.txt` from a GTFS ZIP file (local or remote) into a DataFrame.
@@ -262,6 +543,21 @@ def read_stop_times(path: str) -> pd.DataFrame:
     """
     return _open_file(path, "stop_times.txt")
 
+def read_timeframes(path: str) -> pd.DataFrame:
+    """
+    Loads the `timeframes.txt` from a GTFS ZIP file (local or remote) into a DataFrame.
+
+    Parameters
+    ----------
+    path : str
+        The path to the source ZIP file. Can be a local path or an URL ;
+    
+    Returns
+    -------
+        A DataFrame containing the time frames data.
+    """
+    return _open_file(str, "timeframes.txt")
+
 def read_transfers(path: str) -> pd.DataFrame:
     """
     Loads the `transfers.txt` from a GTFS ZIP file (local or remote) into a DataFrame.
@@ -276,6 +572,21 @@ def read_transfers(path: str) -> pd.DataFrame:
         A DataFrame containing the the transfers data.
     """
     return _open_file(path, "transfers.txt")
+
+def read_translations(path:str) -> pd.DataFrame:
+    """
+    Loads the `translations.txt` from a GTFS ZIP file (local or remote) into a DataFrame.
+
+    Parameters
+    ----------
+    path : str
+        The path to the source ZIP file. Can be a local path or an URL ;
+    
+    Returns
+    -------
+        A DataFrame containing the translations data.
+    """
+    return _open_file(path, "translations.txt")
 
 def read_trips(path: str) -> pd.DataFrame:
     """
@@ -294,84 +605,99 @@ def read_trips(path: str) -> pd.DataFrame:
 
 def load_feed(path: str) -> Dict[str, Union[pd.DataFrame, gpd.GeoDataFrame]]:
     """
-    Loads an entire GTFS feed (ZIP file or URL) into memory.
+    Loads the entire GTFS feed into a dictionnary, while checking for requirements
 
-    This master loader automatically detects and calls all `read_*` functions 
-    defined in this module. Each `read_*` function loads a specific GTFS 
-    component (e.g., stops, routes, trips) and returns a DataFrame or 
-    GeoDataFrame as appropriate.
+    Required files : 
+        - `agency.txt` ;
+        - either `calendar.txt` or `calendar_dates.txt`
+        - `routes.txt` ;
+        - `trips.txt` ;
+        - `stop_times.txt` ;
+        - `stops.txt` unless `locations.geojson` is provided, in which case stops are optional.
 
     Parameters
     ----------
     path : str
-        Path or URL to the GTFS ZIP file. Both local and remote files are supported.
+        The path to the source ZIP file. Can be a local path or an URL.
 
     Returns
     -------
-    feed : dict of {str: pandas.DataFrame or geopandas.GeoDataFrame}
-        A dictionary mapping GTFS component names (without `.txt`) to their 
-        corresponding DataFrames or GeoDataFrames.  
-        For example:
-        
-        {
-            "agency": DataFrame,
-            "stops": GeoDataFrame,
-            "routes": DataFrame,
-            "trips": DataFrame,
-            "stop_times": DataFrame,
-            "calendar": DataFrame,
-            "calendar_dates": DataFrame,
-            "shapes": GeoDataFrame,
-            ...
-        }
-
-    Notes
-    -----
-    - The loader automatically discovers all functions named `read_*` in this module.
-    - Only GTFS files present in the ZIP archive are loaded; missing optional files
-      are skipped silently (with a warning).
-    - `stops` and `shapes` are typically returned as GeoDataFrames; all others 
-      are standard pandas DataFrames.
-    - Geometry validation is performed automatically for all GeoDataFrames.
+    Dict[str, Union[pandas.DataFrame, geopandas.GeoDataFrame]]
+        A dictionnary containing the GTFS feed data
 
     Raises
     ------
-    - requests.exceptions.RequestException
-        If downloading a remote GTFS feed fails.
-    
-    - zipfile.BadZipFile
-        If the provided file is not a valid ZIP archive.
-    
-    - ValueError
-        If a loader encounters invalid or corrupted data.
+    FileNotFoundError
+        If any required file is missing.
+    Exception
+        If any exception in the loaders occured (unless caught and skipped).
     """
-    # Gets the list of functions
+    # Lists all loaders
     current_module = globals()
-    loaders : Dict[str, Callable]={
+    loaders: Dict[str, Callable]={
         name[5:]: func
         for name, func in current_module.items()
         if callable(func) and name.startswith("read_")
     }
-    # Checks the files availability
+    # Required files
+    REQUIRED = {"agency", "routes", "trips", "stop_times"}
+    CALENDAR_ALTERNATIVE={"calendar", "calendar_dates"}
+    # Lists available file
     if path.startswith(("http://", "https://")):
         response = requests.get(path)
         response.raise_for_status()
         zip_bytes = io.BytesIO(response.content)
     else:
         zip_bytes = open(path, "rb")
+
     with zipfile.ZipFile(zip_bytes, "r") as z:
         available_files = set(z.namelist())
-    # Creates the dictionnary
+    available_names = {
+        fname.replace(".txt", "")
+        for fname in available_files
+        if fname.endswith(".txt")
+    }
+    available_geojson = {
+        fname.replace(".geojson", "")
+        for fname in available_files
+        if fname.endswith(".geojson")
+    }
+    # Handling stops.txt/locations.geojson
+    has_locations = "locations" in available_geojson
+    has_stops = "stops" in available_names
+    if not has_locations and not has_stops:
+        raise FileNotFoundError(
+            "GTFS feed must include either stops.txt or locations.geojson. "
+            "Neither was found."
+        )
+    if has_stops:
+        REQUIRED = REQUIRED | {"stops"}
+    # Checks required files and calendars
+    missing_required = REQUIRED - available_names
+    if missing_required:
+        raise FileNotFoundError(
+            "Required GTFS file(s) missing: " +
+            ", ".join(f"{name}.txt" for name in sorted(missing_required))
+        )
+    if not (CALENDAR_ALTERNATIVE & available_names):
+        raise FileNotFoundError(
+            "GTFS feed must include at least one of: "
+            "calendar.txt or calendar_dates.txt"
+        )
+    # Loads files
     feed: Dict[str, Union[pd.DataFrame, gpd.GeoDataFrame]] = {}
-    # Fills the dictionnary by calling each loader
     for name, func in loaders.items():
-        fname = f"{name}.txt"
-        if fname in available_files:
+        txt_name = f"{name}.txt"
+        geojson_name = f"{name}.geojson"
+
+        if txt_name in available_files or geojson_name in available_files:
             try:
                 feed[name] = func(path)
-                # Validates the geometry for the spatial tables (stops and shapes)
+
+                # Validate geometries for GeoDataFrames
                 if isinstance(feed[name], gpd.GeoDataFrame):
                     _validate_geometries(feed[name], name)
+
             except Exception as e:
-                print(f"Skipping {fname}: {e}")
+                print(f"Skipping {name}: {e}")
     return feed
