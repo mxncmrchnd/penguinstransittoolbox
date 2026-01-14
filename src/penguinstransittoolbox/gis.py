@@ -1,6 +1,7 @@
 """
 `gis`module : 
 
+SOON TO BE REMOVED
 A module to work with `stops`and `shapes` as GIS files.
 """
 

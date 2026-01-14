@@ -1,6 +1,7 @@
 """
 `zip` module :
 
+SOON TO BE REMOVED
 A module to read GTFS data from a ZIP file.
 
 Notes

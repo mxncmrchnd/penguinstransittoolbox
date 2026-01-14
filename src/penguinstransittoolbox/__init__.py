@@ -4,6 +4,7 @@ Penguin's Transit Toolbox
 
 A python package to manage GTFS feeds.
 Compatible with the GTFS Fares-v2 extension proposal.
+Development is currently paused.
 
 Modules
 -------
@@ -11,15 +12,21 @@ edit :
     A module to edit an existing feed.
 
 gis :
+    SOON TO BE REMOVED
     A module to work with `stops`and `shapes` as GIS files.
 
+io :
+    A module to handle inputs and outputs : read from files, create empty tables/feeds, export tables/feeds.
+
 new :
+    SOON TO BE REMOVED
     A module to create an empty feed.
 
 schemas : 
     GTFS table schemas definitions.
 
 zip : 
+    SOON TO BE REMOVED
     A module to read GTFS data from a ZIP file.
 
 """

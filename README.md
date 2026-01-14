@@ -40,11 +40,10 @@
 
 ## Planned roadmap
 
-- v0.2.0 (coming december 2025) :
-    - `new` module to create an empty GTFS feed ;
-    - `edit` module to modify an existing feed.
-- v0.3.0 (coming early 2026) :
-    - `spatial` module to perform spatial operations on the feed, including routing.
+** Development is currently paused **
+
+The package structure will be completely overhauled for version `0.2.0`. 
+In the near future, a single module `io` will handle all reading/exporting operations, as well as the creation of empty tables/feeds.
 
 ## Installation
 

@@ -1,6 +1,7 @@
 """
 `new` module : 
 
+SOON TO BE REMOVED
 A module to create an empty feed.
 See penguinstransittoolbox.schemas for more informations about columns and types for each file.
 """
