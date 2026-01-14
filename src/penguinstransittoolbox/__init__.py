@@ -36,6 +36,7 @@ from importlib import import_module
 __all__ = [
     "edit",
     "gis",
+    "io",
     "new",
     "schemas",
     "zip"
